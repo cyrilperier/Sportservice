@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1081359798942",
+    "project_id": "gym-helper-f645c",
+    "storage_bucket": "gym-helper-f645c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081359798942:android:aa79769789bde5a35d618f",
+        "android_client_info": {
+          "package_name": "com.uqac.pmm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081359798942-47346186lfacoehhk8a1t452jol3qlbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJrFXkhvvQjoCoRMX0q3z-Dj6fm4xbOtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081359798942-47346186lfacoehhk8a1t452jol3qlbu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

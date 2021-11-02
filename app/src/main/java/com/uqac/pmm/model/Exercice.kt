@@ -15,6 +15,4 @@ data class Exercice(
     val name:String,
     val type: Type
 
-
-
 ){}
