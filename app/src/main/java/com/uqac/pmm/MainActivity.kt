@@ -13,28 +13,46 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         add_exercice()
+        this.deleteDatabase ("exercices-db") //Ne pas oublier de supprimer
+        read_exercice()
+        Log.d("TAG","test")
     }
 
 
 
     fun add_exercice(){
+        Log.d("TAG","add exercice")
         val db = Firebase.firestore
 
-        val user = hashMapOf(
-            "first" to "Ada",
-            "last" to "Lovelace",
-            "born" to 1815
+        val exercice = hashMapOf(
+            "Nom" to "burpees",
+            "Type" to "sans machine",
+            "Zone" to "corps"
         )
 
 // Add a new document with a generated ID
-        db.collection("users")
-            .add(user)
+        db.collection("Exercice")
+            .add(exercice)
             .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
+                Log.d("TAG", "Error adding document", e)
             }
 
+    }
+    fun read_exercice() {
+        Log.d("TAG","read exercice")
+        val db = Firebase.firestore
+        db.collection("Exercice")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("TAG", "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("TAG", "Error getting documents.", exception)
+            }
     }
 }

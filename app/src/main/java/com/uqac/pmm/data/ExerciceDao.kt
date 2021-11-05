@@ -1,6 +1,5 @@
 package com.uqac.pmm.data
 
-
 import androidx.room.*
 import com.uqac.pmm.model.Exercice
 
