@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Sport service</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="Tab_3">McDO</string>
+    <string name="tab_text_1">Accueil</string>
+    <string name="tab_text_2">Profil</string>
+    <string name="Tab_3">Calendrier</string>
+    <string name="title_activity_main2">MainActivity2</string>
 </resources>
