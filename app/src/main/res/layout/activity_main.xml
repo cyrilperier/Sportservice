@@ -4,15 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#F44336"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/button_entrainement"
+        android:layout_width="185dp"
+        android:layout_height="57dp"
+        android:backgroundTint="#F44336"
+        android:fontFamily="serif"
+        android:text="Entrainement"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="20sp"
+        android:typeface="serif"
+        app:cornerRadius="50dp"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="89dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
