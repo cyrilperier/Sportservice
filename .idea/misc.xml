@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projets androids/Firebase/Sportservice/app/src/main/res/layout/activity_calendar.xml" value="0.20520833333333333" />
+        <entry key="..\:/Projets androids/Firebase/Sportservice/app/src/main/res/layout/login.xml" value="0.20520833333333333" />
+        <entry key="..\:/Projets androids/Firebase/Sportservice/app/src/main/res/layout/register.xml" value="0.25" />
+        <entry key="..\:/Projets androids/Firebase/Sportservice/app/src/main/res/layout/register2.xml" value="0.25833333333333336" />
+        <entry key="..\:/Projets androids/Firebase/Sportservice/app/src/main/res/layout/start_screen.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
       </map>
     </option>
