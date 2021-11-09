@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.uqac.pmm.ui.main.SectionsPagerAdapter
 import com.uqac.pmm.databinding.ActivityHomeBinding
 
@@ -28,9 +29,15 @@ class HomeActivity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
         val fab: FloatingActionButton = binding.fab
 
-        fab.setOnClickListener { view ->
+/*        fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }*/
+        fab.setOnClickListener { view -> setContentView(R.layout.activity_selection)
         }
+
+    }
+    fun Layout_Change(view: View){
+        setContentView(R.layout.activity_selection);
     }
 }
