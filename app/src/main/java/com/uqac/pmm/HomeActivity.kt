@@ -37,7 +37,16 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-    fun Layout_Change(view: View){
+    fun Layout_Change_Selection(view: View){
         setContentView(R.layout.activity_selection);
     }
+
+    fun Layout_Change_Workout(view: View){
+        setContentView(R.layout.activity_workout);
+    }
+
+    fun Layout_Change_Machine(view: View){
+        setContentView(R.layout.activity_machine);
+    }
+
 }
