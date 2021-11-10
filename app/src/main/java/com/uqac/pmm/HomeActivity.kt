@@ -26,11 +26,13 @@ class HomeActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = binding.fab
+/* setContentView(com.uqac.pmm.R.layout.activity_home)
+        val vpPager = findViewById<View>(com.uqac.pmm.R.id.view_pager) as ViewPager
+        adapterViewPager = SectionsPagerAdapter(this,supportFragmentManager)
+        vpPager.adapter = adapterViewPager
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+ */
+
+
     }
 }

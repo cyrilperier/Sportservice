@@ -4,7 +4,13 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+
+import com.uqac.pmm.FragmentCalandarActivity
+import com.uqac.pmm.FragmentMainActivity
+import com.uqac.pmm.FragmentProfileActivity
 import com.uqac.pmm.R
+import com.uqac.pmm.fragment.FirstFragment
+
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -16,13 +22,16 @@ private val TAB_TITLES = arrayOf(
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
-    FragmentPagerAdapter(fm) {
+class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1)
+       when(position){
+           0->{return FragmentMainActivity.newInstance(0,"la")}
+           1->{return FragmentProfileActivity.newInstance(1,"la")}
+           2->{return FragmentCalandarActivity.newInstance(2,"la")}
+           else ->{return FirstFragment.newInstance(0,"la")}
+
+       }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

@@ -16,7 +16,7 @@ import com.uqac.pmm.databinding.FragmentHome1Binding
  */
 class PlaceholderFragment : Fragment() {
 
-    private lateinit var pageViewModel: PageViewModel
+
     private var _binding: FragmentHome1Binding? = null
 
     // This property is only valid between onCreateView and
@@ -25,9 +25,7 @@ class PlaceholderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-        }
+
     }
 
     override fun onCreateView(
@@ -38,10 +36,7 @@ class PlaceholderFragment : Fragment() {
         _binding = FragmentHome1Binding.inflate(inflater, container, false)
         val root = binding.root
 
-        val textView: TextView = binding.sectionLabel
-        pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
     }
 
@@ -50,7 +45,7 @@ class PlaceholderFragment : Fragment() {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private const val ARG_SECTION_NUMBER = "section_number"
+        private const val ARG_SECTION_NUMBER = "1"
 
         /**
          * Returns a new instance of this fragment for the given section
