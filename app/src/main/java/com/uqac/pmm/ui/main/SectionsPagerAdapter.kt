@@ -1,6 +1,7 @@
 package com.uqac.pmm.ui.main
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -25,11 +26,12 @@ private val TAB_TITLES = arrayOf(
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
+        Log.d("TAG", position.toString())
        when(position){
-           0->{return FragmentMainActivity.newInstance(0,"la")}
-           1->{return FragmentProfileActivity.newInstance(1,"la")}
+           0->{return FragmentProfileActivity.newInstance(0,"la")}
+           1->{return FragmentMainActivity.newInstance(1,"la")}
            2->{return FragmentCalandarActivity.newInstance(2,"la")}
-           else ->{return FirstFragment.newInstance(0,"la")}
+           else ->{return FragmentMainActivity.newInstance(0,"la")}
 
        }
     }

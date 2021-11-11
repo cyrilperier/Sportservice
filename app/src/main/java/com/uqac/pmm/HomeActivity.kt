@@ -1,6 +1,7 @@
 package com.uqac.pmm
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -10,6 +11,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.uqac.pmm.ui.main.SectionsPagerAdapter
 import com.uqac.pmm.databinding.ActivityHomeBinding
+import android.R
+import android.view.View
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -26,12 +30,17 @@ class HomeActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
+        Log.d("TAG", binding.toString())
+
 /* setContentView(com.uqac.pmm.R.layout.activity_home)
         val vpPager = findViewById<View>(com.uqac.pmm.R.id.view_pager) as ViewPager
         adapterViewPager = SectionsPagerAdapter(this,supportFragmentManager)
         vpPager.adapter = adapterViewPager
 
+
+
  */
+
 
 
     }
