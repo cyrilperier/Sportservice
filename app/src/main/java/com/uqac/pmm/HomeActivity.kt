@@ -29,13 +29,6 @@ class HomeActivity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
         val fab: FloatingActionButton = binding.fab
 
-/*        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
-        fab.setOnClickListener { view -> setContentView(R.layout.activity_selection)
-        }
-
     }
     fun Layout_Change_Selection(view: View){
         setContentView(R.layout.activity_selection);
@@ -48,5 +41,10 @@ class HomeActivity : AppCompatActivity() {
     fun Layout_Change_Machine(view: View){
         setContentView(R.layout.activity_machine);
     }
+
+    fun Layout_Change_Workout_i(view: View){
+        setContentView(R.layout.activity_workout_i);
+    }
+
 
 }
