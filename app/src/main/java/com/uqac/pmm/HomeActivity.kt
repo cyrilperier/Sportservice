@@ -1,47 +1,47 @@
 package com.uqac.pmm
 
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import com.uqac.pmm.ui.main.SectionsPagerAdapter
-import com.uqac.pmm.databinding.ActivityHomeBinding
-import android.R
-import android.view.View
+import android.widget.Toast
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var sectionNamesArray: Array<String>
+
+
+    private var sectionPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
 
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
-        Log.d("TAG", binding.toString())
-
-/* setContentView(com.uqac.pmm.R.layout.activity_home)
-        val vpPager = findViewById<View>(com.uqac.pmm.R.id.view_pager) as ViewPager
-        adapterViewPager = SectionsPagerAdapter(this,supportFragmentManager)
-        vpPager.adapter = adapterViewPager
+        sectionNamesArray = resources.getStringArray(com.uqac.pmm.R.array.section_names)
 
 
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, sectionNamesArray.size)
+        sectionViewPager.adapter = sectionsPagerAdapter
 
- */
+
+        sectionViewPager.registerOnPageChangeCallback(sectionPageChangeCallback)
 
 
+        TabLayoutMediator(tabLayout, sectionViewPager) { tab, position ->
+            tab.text = sectionNamesArray[position].substringBefore(' ')
+        }.attach()
 
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sectionViewPager.unregisterOnPageChangeCallback(sectionPageChangeCallback)
     }
 }

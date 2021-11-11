@@ -4,61 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.uqac.pmm.databinding.FragmentHome1Binding
-import com.uqac.pmm.fragment.FragmentCalendar
+
 
 class FragmentCalandarActivity : Fragment() {
-    private var title: String? = null
-    private var page = 2
-
-    private var _binding: FragmentHome1Binding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        page = arguments?.getInt("someInt", 2)!!
-        title = arguments?.getString("someTitle")
-    }
-
-    /*
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            vg: ViewGroup?,
-            savedInstanceState: Bundle
-        ): View? {
-            return inflater.inflate(R.layout.fragment_calendar, vg, false)
-        }*/
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_activity_calendar, container, false)
-
-        return view
-    }
-
     companion object {
-        @JvmStatic
-        fun newInstance(page: Int, title: String?): FragmentCalandarActivity {
-            val fragmentCalandar = FragmentCalandarActivity()
-            val args = Bundle()
-            args.putInt("someInt", page)
-            args.putString("someTitle", title)
-            fragmentCalandar.setArguments(args)
-            return fragmentCalandar.apply {
-                arguments = Bundle().apply {
-                    putInt(title, page)
-                }
-            }
+        const val ARG_POSITION = "position"
+
+        fun getInstance(position: Int): Fragment {
+            val doppelgangerFragment = FragmentCalandarActivity()
+            val bundle = Bundle()
+            bundle.putInt(ARG_POSITION, position)
+            doppelgangerFragment.arguments = bundle
+            return doppelgangerFragment
         }
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_activity_calendar, container, false)
     }
+
+
+
 }
