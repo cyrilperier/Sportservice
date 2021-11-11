@@ -11,12 +11,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-class FragmentMainActivity : Fragment() {
+class FragmentDocumentationActivity : Fragment() {
     companion object {
         const val ARG_POSITION = "position"
 
         fun getInstance(position: Int): Fragment {
-            val doppelgangerFragment = FragmentMainActivity()
+            val doppelgangerFragment = FragmentDocumentationActivity()
             val bundle = Bundle()
             bundle.putInt(ARG_POSITION, position)
             doppelgangerFragment.arguments = bundle
@@ -26,7 +26,7 @@ class FragmentMainActivity : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_activity_main, container, false)
+        return inflater.inflate(R.layout.fragment_activity_documentation, container, false)
     }
 
 

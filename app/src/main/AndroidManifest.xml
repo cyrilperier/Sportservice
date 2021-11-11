@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FragmentMainActivity"
+            android:name=".FragmentDocumentationActivity"
             android:exported="true"></activity>
     </application>
 

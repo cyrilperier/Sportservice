@@ -13,11 +13,8 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var sectionNamesArray: Array<String>
 
-
     private var sectionPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -25,18 +22,14 @@ class HomeActivity : AppCompatActivity() {
 
         sectionNamesArray = resources.getStringArray(com.uqac.pmm.R.array.section_names)
 
-
         val sectionsPagerAdapter = SectionsPagerAdapter(this, sectionNamesArray.size)
         sectionViewPager.adapter = sectionsPagerAdapter
 
-
         sectionViewPager.registerOnPageChangeCallback(sectionPageChangeCallback)
-
 
         TabLayoutMediator(tabLayout, sectionViewPager) { tab, position ->
             tab.text = sectionNamesArray[position].substringBefore(' ')
         }.attach()
-
 
     }
 

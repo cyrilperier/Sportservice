@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.uqac.pmm.FragmentCalandarActivity
-import com.uqac.pmm.FragmentMainActivity
+import com.uqac.pmm.FragmentDocumentationActivity
 import com.uqac.pmm.FragmentProfileActivity
 
 
@@ -25,13 +25,13 @@ class SectionsPagerAdapter(activity: AppCompatActivity, private val itemsCount: 
                     return FragmentProfileActivity.getInstance(position)
                 }
                 1 -> {
-                    return FragmentMainActivity.getInstance(position)
+                    return FragmentDocumentationActivity.getInstance(position)
                 }
                 2 -> {
                     return FragmentCalandarActivity.getInstance(position)
                 }
                 else -> {
-                    return FragmentMainActivity.getInstance(position)
+                    return FragmentDocumentationActivity.getInstance(position)
                 }
             }
         }

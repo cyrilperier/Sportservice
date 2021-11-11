@@ -4,8 +4,8 @@
     <string name="title_activity_main2">MainActivity2</string>
 
     <string-array name="section_names">
-        <item>Accueil</item>
         <item>Profil</item>
+        <item>Documentation</item>
         <item>Calendrier</item>
 
     </string-array>
