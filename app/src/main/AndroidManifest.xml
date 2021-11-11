@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.uqac.pmm">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,13 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SportService">
+
         <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.SportService.NoActionBar" />
-        <activity
-            android:name=".HomeActivity"
+            android:name=".StartActivity"
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.SportService.NoActionBar">
@@ -40,13 +37,16 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
+
+            android:label="@string/title_activity_home"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".FragmentDocumentationActivity"
-            android:exported="true"></activity>
+            android:exported="true"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

@@ -28,16 +28,14 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         Log.d("TAG", auth.toString())
         login?.setOnClickListener(View.OnClickListener {
-            val txt_email: String = email?.getText().toString()
-            val txt_pass: String = password?.getText().toString()
             Log.d("TAG", email.toString())
             Log.d("TAG", password.toString())
-            auth!!.signInWithEmailAndPassword(txt_email, txt_pass)
-                .addOnCompleteListener(this) { task ->
+            auth?.signInWithEmailAndPassword(email?.text.toString(), password?.text.toString())
+                ?.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Log.d("TAG", "signInWithEmail:success")
-                        val user = auth!!.currentUser
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        val user = auth?.currentUser
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                         finish()
