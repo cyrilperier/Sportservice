@@ -35,9 +35,12 @@ class LoginActivity : AppCompatActivity() {
             auth!!.signInWithEmailAndPassword(txt_email, txt_pass)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d("TAG", "signInWithEmail:success")
                         val user = auth!!.currentUser
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("TAG", "signInWithEmail:failure", task.exception)

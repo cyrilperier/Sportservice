@@ -64,10 +64,9 @@ class RegisterActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's informatiodn
                     Log.d("TAG", "createUserWithEmail:success")
                     val user = auth!!.currentUser
-
-                    Log.d("TAG", auth.toString())
-
-                    Log.d("TAG", user.toString())
+                    val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("TAG", "createUserWithEmail:failure", task.exception)
