@@ -1,9 +1,9 @@
 package com.uqac.pmm
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.uqac.pmm.ui.main.SectionsPagerAdapter
-import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_home.*
@@ -37,4 +37,29 @@ class HomeActivity : AppCompatActivity() {
         super.onDestroy()
         sectionViewPager.unregisterOnPageChangeCallback(sectionPageChangeCallback)
     }
-}
+
+        fun Layout_Change_Selection(view: View){
+            setContentView(R.layout.activity_documentation);
+        }
+
+        fun Layout_Change_Workout(view: View){
+            setContentView(R.layout.activity_workout);
+        }
+
+        fun Layout_Change_Machine(view: View){
+            setContentView(R.layout.activity_machine);
+        }
+
+        fun Layout_Change_Workout_i(view: View){
+            setContentView(R.layout.activity_workout_i);
+        }
+
+        fun Layout_Change_Machine_Shoulder_List(view: View){
+            setContentView(R.layout.activity_machine_selection);
+        }
+
+        fun Layout_Change_Machine_Shoulder_description(view: View){
+            setContentView(R.layout.activity_machine_description);
+        }
+
+    }
