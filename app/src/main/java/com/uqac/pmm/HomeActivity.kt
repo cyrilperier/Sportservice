@@ -13,9 +13,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import com.google.firebase.auth.GetTokenResult
 
 import com.google.android.gms.tasks.OnSuccessListener
-
-
-
+import com.google.firebase.firestore.ktx.firestore
 
 
 class HomeActivity : AppCompatActivity() {
@@ -50,6 +48,19 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("TAG","token :  $idToken")
             }
         }
+        val db = Firebase.firestore
+        val docRef = db.collection("users").document("$uid")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d("TAG", "DocumentSnapshot data: ${document.data}")
+                } else {
+                    Log.d("TAG", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("TAG", "get failed with ", exception)
+            }
 
     }
 
