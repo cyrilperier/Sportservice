@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="290dp"
+            android:layout_height="299dp"
+            android:layout_marginBottom="20dp"
+            app:srcCompat="@drawable/assisepaule"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="341dp"
+            android:layout_height="331dp"
+            android:layout_marginLeft="10dp"
+            android:text="L’amour, panique\nDe la raison,\nSe communique\nPar le frisson.\n\nLaissez-moi dire,\nN’accordez rien.\nSi je soupire,\nChantez, c’est bien.\n\nVictor Hugo, Les chansons des rues et des bois, 1865"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="359dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
