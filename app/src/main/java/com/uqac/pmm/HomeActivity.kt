@@ -1,12 +1,21 @@
 package com.uqac.pmm
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.uqac.pmm.ui.main.SectionsPagerAdapter
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home.*
+import com.google.firebase.auth.GetTokenResult
+
+import com.google.android.gms.tasks.OnSuccessListener
+
+
+
 
 
 class HomeActivity : AppCompatActivity() {
@@ -16,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
     private var sectionPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
+
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -30,6 +40,16 @@ class HomeActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, sectionViewPager) { tab, position ->
             tab.text = sectionNamesArray[position].substringBefore(' ')
         }.attach()
+        val user = Firebase.auth.currentUser
+        val uid = user?.uid
+        Log.d("TAG","token mon boug :  $uid")
+        user!!.getIdToken(true).addOnSuccessListener { result ->
+            val idToken = result.token
+            //Do whatever
+            if (idToken != null) {
+                Log.d("TAG","token :  $idToken")
+            }
+        }
 
     }
 
