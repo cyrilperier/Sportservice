@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-Layout de selection des différents menus
+Layout des différents entrainements créé jusqu'à maintenant
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,20 +10,6 @@ Layout de selection des différents menus
     tools:layout_editor_absoluteX="-1dp"
     tools:layout_editor_absoluteY="146dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button5"
-        android:layout_width="302dp"
-        android:layout_height="118dp"
-        android:layout_marginTop="25dp"
-        android:background="#757575"
-        android:drawableLeft="@drawable/pushup"
-        android:text="Exercices sans Machine"
-        android:textColor="#050303"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
@@ -31,11 +17,10 @@ Layout de selection des différents menus
         android:layout_height="118dp"
         android:layout_marginTop="16dp"
         android:background="#757575"
-        android:drawableLeft="@drawable/workout"
-        android:text="Entrainement"
+        android:text="Machine 1"
         android:textColor="#050303"
         android:textSize="24sp"
-        android:onClick="Layout_Change_Workout"
+        android:onClick="Layout_Change_Machine_Shoulder_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,11 +32,9 @@ Layout de selection des différents menus
         android:layout_height="118dp"
         android:layout_marginTop="23dp"
         android:background="#757575"
-        android:drawableLeft="@drawable/machine"
-        android:text="Machines"
+        android:text="Machine 2"
         android:textColor="#050303"
         android:textSize="24sp"
-        android:onClick="Layout_Change_Machine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +46,7 @@ Layout de selection des différents menus
         android:layout_height="118dp"
         android:layout_marginTop="19dp"
         android:background="#757575"
-        android:drawableLeft="@drawable/etirement"
-        android:text="Etirements"
+        android:text="Machine 3"
         android:textColor="#050303"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +60,7 @@ Layout de selection des différents menus
         android:layout_height="118dp"
         android:layout_marginTop="21dp"
         android:background="#757575"
-        android:drawableLeft="@drawable/warmup"
-        android:text="Echauffement"
+        android:text="Machine 4"
         android:textColor="#050303"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,5 +68,18 @@ Layout de selection des différents menus
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button5"
+        android:layout_width="302dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="25dp"
+        android:background="#757575"
+        android:text="Machine 5"
+        android:textColor="#050303"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

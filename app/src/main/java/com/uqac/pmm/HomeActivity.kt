@@ -46,5 +46,12 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_workout_i);
     }
 
+    fun Layout_Change_Machine_Shoulder_List(view: View){
+        setContentView(R.layout.activity_machine_selection);
+    }
+
+    fun Layout_Change_Machine_Shoulder_description(view: View){
+        setContentView(R.layout.activity_machine_description);
+    }
 
 }

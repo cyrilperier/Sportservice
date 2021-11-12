@@ -39,7 +39,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/deltoides" />
+                android:background="@drawable/deltoides"
+                android:onClick="Layout_Change_Machine_Shoulder_List"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -60,7 +61,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/pectoraux" />
+                android:background="@drawable/pectoraux"/>
 
             <TextView
                 android:id="@+id/textView5"
