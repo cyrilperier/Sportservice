@@ -14,6 +14,7 @@ import com.google.firebase.auth.GetTokenResult
 
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.ktx.firestore
+import java.sql.Timestamp
 
 
 class HomeActivity : AppCompatActivity() {
@@ -49,17 +50,37 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         val db = Firebase.firestore
+        val training = hashMapOf(
+            "exercices" to arrayListOf<String>("test5", "test6"),
+            "dates" to arrayListOf<String>("23 novembre 2021 à 00:00:00 UTC-5\n"),
+        )
+        //ADD A TRAINING TO THE USER'S TRAINING COLLECTION
+        //addTraining(uid,training)
         val docRef = db.collection("users").document("$uid")
+            .collection("trainings")
         docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    Log.d("TAG", "DocumentSnapshot data: ${document.data}")
-                } else {
-                    Log.d("TAG", "No such document")
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d("TAG", "${document.id} => ${document.data}")
                 }
             }
             .addOnFailureListener { exception ->
                 Log.d("TAG", "get failed with ", exception)
+            }
+
+    }
+
+    private fun addTraining(uid: String?, training: HashMap<String, ArrayList<String>>) {
+
+        val db = Firebase.firestore
+        db.collection("users").document("$uid")
+            .collection("trainings")
+            .add(training)
+            .addOnSuccessListener { documentReference ->
+                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.d("TAG", "Error adding document", e)
             }
 
     }
