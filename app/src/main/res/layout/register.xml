@@ -9,6 +9,12 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/identifiant" />
+
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
@@ -16,12 +22,23 @@
         android:gravity="top"
         android:inputType="text" />
 
+    <TextView
+        android:id="@+id/textViewPasswordRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/password" />
+
     <EditText
         android:id="@+id/passwordRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
-
+        android:inputType="text"
+        android:password="true"/>
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email" />
     <EditText
         android:id="@+id/emailRegister"
         android:layout_width="match_parent"
