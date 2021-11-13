@@ -52,11 +52,6 @@ class HomeActivity : AppCompatActivity() {
             "exercices" to arrayListOf<String>("test5", "test6"),
             "dates" to arrayListOf<String>("23 novembre 2021 à 00:00:00 UTC-5\n"),
         )
-        val training2 = hashMapOf(
-            "title" to "training 3",
-            "exercices" to arrayListOf<String>("test5", "test6"),
-            "dates" to arrayListOf<String>("23 novembre 2021 à 00:00:00 UTC-5\n"),
-        )
         //ADD A TRAINING TO THE USER'S TRAINING COLLECTION
         //addTraining(uid,training)
         //addTraining(uid,training2)

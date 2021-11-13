@@ -60,49 +60,6 @@ class FragmentDocumentationActivity : Fragment() {
         }
         return v
     }
-/*
-    private fun taskPopUp(v: View?) {
-        //var dialog = customDialogFragment()
-        val dialog = Dialog(requireActivity())
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.fragment_custom_dialog)
-        val fragmentManager = (activity as FragmentActivity).supportFragmentManager
-        val ll = dialog.findViewById<View>(R.id.linearcheck)
-
-        val user = Firebase.auth.currentUser
-        val uid = user?.uid
-        val db = Firebase.firestore
-        val map = hashMapOf<String, String>()
-        val array = arrayOf<String>()
-        val docRef = db.collection("users")
-            .document("$uid")
-            .collection("trainings")
-        docRef.get()
-            .addOnSuccessListener { documents ->
-
-                for (document in documents) {
-
-                    var lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    val cb = CheckBox(context)
-
-                    ll.addView(cb, lp)
-                    //map[document.id] = document.getString("title").toString()
-                    //array.plus(document.getString("title").toString())
-                    //Log.d("TAG", "${document.id} => ${document.data}")
-                    //Log.d("this is my array", "arr: " + Arrays.toString(array))
-                    //Log.d("this is my map", map.toString())
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d("TAG", "get failed with ", exception)
-            }
-        //dialog.show(fragmentManager, "customDialog")
-        dialog.show()
-    }
-*/
 
     private fun openDialog(v: View?, map: LinkedHashMap<String, String>) {
         val array2 = mutableListOf<String>()
