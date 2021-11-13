@@ -17,6 +17,7 @@ import kotlin.collections.HashMap
 
 class FragmentDocumentationActivity : Fragment() {
     private var pompes: Button? = null
+    private var addtraining: Button? = null
     companion object {
         const val ARG_POSITION = "position"
 
@@ -58,6 +59,12 @@ class FragmentDocumentationActivity : Fragment() {
             Log.d("TAG","t'es bien ici")
 
         }
+        addtraining = v.findViewById(R.id.button_add_training)
+        addtraining?.setOnClickListener {
+            confirmFireMissiles()
+            Log.d("TAG","addtraining lancé")
+
+        }
         return v
     }
 
@@ -70,7 +77,10 @@ class FragmentDocumentationActivity : Fragment() {
         val newFragment = FireMissilesDialogFragment(array,map)
         fragmentManager?.let { newFragment.show(it, "missiles") }
     }
-
+    fun confirmFireMissiles() {
+        val newFragment = DialogFragmentAddTraining()
+        fragmentManager?.let { newFragment.show(it, "missiles") }
+    }
 
     fun add_exercice(){
         Log.d("TAG","add exercice")
