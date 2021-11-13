@@ -42,6 +42,12 @@ class RegisterActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's informatiodn
                     Log.d("TAG", "createUserWithEmail:success")
                     val user = auth?.currentUser
+                    val uid = user?.uid
+                    val db = Firebase.firestore
+                    val name = hashMapOf(
+                        "username" to username,
+                    )
+                    db.collection("users").document("$uid").set(name)
                     val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)

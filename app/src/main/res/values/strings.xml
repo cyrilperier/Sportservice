@@ -2,9 +2,8 @@
     <string name="app_name">Sport service</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_main2">MainActivity2</string>
-    <string name="identifiant">Identifiant</string>
-    <string name="password">password</string>
-    <string name="email">Email</string>
+    <string name="pick_color"> Pick a color </string>
+    <string name="ok">OK</string>
 
     <string-array name="section_names">
         <item>Profil</item>
