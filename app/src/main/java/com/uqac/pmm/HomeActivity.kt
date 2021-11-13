@@ -48,13 +48,18 @@ class HomeActivity : AppCompatActivity() {
         }
         val db = Firebase.firestore
         val training = hashMapOf(
-            "title" to "training 1",
+            "title" to "training 2",
+            "exercices" to arrayListOf<String>("test5", "test6"),
+            "dates" to arrayListOf<String>("23 novembre 2021 à 00:00:00 UTC-5\n"),
+        )
+        val training2 = hashMapOf(
+            "title" to "training 3",
             "exercices" to arrayListOf<String>("test5", "test6"),
             "dates" to arrayListOf<String>("23 novembre 2021 à 00:00:00 UTC-5\n"),
         )
         //ADD A TRAINING TO THE USER'S TRAINING COLLECTION
-        addTraining(uid,training)
-
+        //addTraining(uid,training)
+        //addTraining(uid,training2)
         //permet de get les doc de la collection training
         val docRef = db.collection("users").document("$uid")
             .collection("trainings")
@@ -71,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     //ADD A TRAINING TO THE USER'S TRAINING COLLECTION
-    private fun addTraining(uid: String?, training: HashMap<String, Serializable>) {
+    protected fun addTraining(uid: String?, training: HashMap<String, Serializable>) {
 
         val db = Firebase.firestore
         db.collection("users").document("$uid")
