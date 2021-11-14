@@ -47,6 +47,10 @@
             android:name=".FragmentDocumentationActivity"
             android:exported="true"
             tools:ignore="Instantiatable" />
+        <activity
+            android:name=".ListEntrainementActivity"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

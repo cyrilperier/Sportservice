@@ -68,6 +68,8 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("TAG", "get failed with ", exception)
             }
 
+
+
     }
 
     //ADD A TRAINING TO THE USER'S TRAINING COLLECTION

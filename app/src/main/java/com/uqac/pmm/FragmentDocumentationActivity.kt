@@ -1,6 +1,7 @@
 package com.uqac.pmm
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,11 +13,13 @@ import com.google.firebase.auth.ktx.auth
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_activity_documentation.*
 import kotlin.collections.HashMap
 
 
 class FragmentDocumentationActivity : Fragment() {
     private var pompes: Button? = null
+    private var button_entrainement : Button? = null
     companion object {
         const val ARG_POSITION = "position"
 
@@ -29,8 +32,11 @@ class FragmentDocumentationActivity : Fragment() {
         }
     }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         val v = inflater.inflate(R.layout.fragment_activity_documentation, container, false)
         val user = Firebase.auth.currentUser
         val uid = user?.uid
@@ -57,6 +63,16 @@ class FragmentDocumentationActivity : Fragment() {
             openDialog(v,map)
             Log.d("TAG","t'es bien ici")
 
+        }
+
+        button_entrainement = v.findViewById(R.id.button_entrainement)
+        button_entrainement?.setOnClickListener{
+
+            with(it.context){
+                val intent = Intent(this, ListEntrainementActivity::class.java)
+                startActivity(intent)
+
+            }
         }
         return v
     }
@@ -94,6 +110,8 @@ class FragmentDocumentationActivity : Fragment() {
 
     }
     fun read_exercice() {
+
+
         Log.d("TAG","read exercice")
         val db = Firebase.firestore
         db.collection("Exercice")
