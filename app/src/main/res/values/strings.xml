@@ -14,4 +14,11 @@
         <item>Calendrier</item>
 
     </string-array>
+
+    <string-array name="entrainement_names">
+        <item>Exercice 1</item>
+        <item>Exercice 2</item>
+        <item>Exercice 3</item>
+
+    </string-array>
 </resources>

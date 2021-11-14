@@ -6,16 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.data.EntrainementDao
 import com.uqac.pmm.data.EntrainementDataBase
 import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.activity_list_entrainement.*
+import kotlinx.android.synthetic.main.list_entrainement_view.*
 import kotlinx.coroutines.runBlocking
 
 class ListEntrainementActivity :AppCompatActivity() {
 
-    lateinit var entrainements: MutableList<Entrainement>
+    lateinit var entrainements: List<Entrainement>
     lateinit var database: EntrainementDataBase
     lateinit var entrainementDao: EntrainementDao
     val map = linkedMapOf<String, String>()
@@ -38,6 +40,10 @@ class ListEntrainementActivity :AppCompatActivity() {
         super.onStart()
         Dao()
         read_entrainement()
+        runBlocking {
+            entrainements = entrainementDao.getAllEntrainements().toMutableList()
+
+        }
 
 
 
@@ -49,43 +55,38 @@ class ListEntrainementActivity :AppCompatActivity() {
         db.collection("Entrainement")
             .get()
             .addOnSuccessListener { result ->
-                for (entrainement in result) {
+                Log.d("TEST", "avant " + result.toString())
+                entrainements = result.map {
+                    Entrainement(it.get("id").toString().toInt(), it.get("name").toString())
+                }
+                Log.d("TEST", "entrainement " + entrainements.toString())
 
-
-                    map[entrainement.id] = entrainement.getString("title").toString()
-                    array.add(entrainement.getString("title").toString())
-                    entrainements.map {
-                        Entrainement(
-                            1,
-                            entrainement.getString("title").toString()
-                        )
-                    }.map {
-                        Log.d("TEST", "avant "+ it.id.toString())
-                        runBlocking {
-                            try {
-                                    Log.d("TEST","it : "+ it.id.toString())
-                                val entrainement_database_local = entrainementDao.findByid(it.id)
-                                Log.d("TEST", entrainement_database_local.toString())
-                            } catch (e: Exception) {
-                                entrainementDao.addEntrainement(it)
-                            }
-
+                entrainements.map {
+                    Log.d("TEST", "avant " + it.id.toString())
+                    runBlocking {
+                        try {
+                            Log.d("TEST", "it : " + it.id.toString())
+                            val entrainement_database_local = entrainementDao.findByid(it.id)
+                            Log.d("TEST", entrainement_database_local.toString())
+                        } catch (e: Exception) {
+                            entrainementDao.addEntrainement(it)
                         }
+
                     }
-
-                    Log.d("TEST", "map "+ map.toString())
-
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.d("TAG", "Error getting documents.", exception)
-            }
+                    Log.d("TEST", "map "+ map.toString())
+                    Log.d("TEST", "array "+ array.toString())
+
+
         runBlocking {
             entrainements = entrainementDao.getAllEntrainements().toMutableList()
 Log.d("TEST","local "+ entrainements.toString())
         list_entrainements_recyclerview.adapter =
             ListEntrainementAdapter(entrainements, this@ListEntrainementActivity)
     }
+
+
 }
 
 
