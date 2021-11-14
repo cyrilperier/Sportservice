@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_detail_entrainement.*
 
 class FragmentDetailEntrainementActivity  : Fragment() {
 
@@ -12,11 +13,11 @@ class FragmentDetailEntrainementActivity  : Fragment() {
         const val ARG_POSITION = "position"
 
         fun getInstance(position: Int): Fragment {
-            val DetailEntrainementFragment = FragmentDetailEntrainementActivity()
+            val detailEntrainementFragment = FragmentDetailEntrainementActivity()
             val bundle = Bundle()
             bundle.putInt(ARG_POSITION, position)
-            DetailEntrainementFragment.arguments = bundle
-            return DetailEntrainementFragment
+            detailEntrainementFragment.arguments = bundle
+            return detailEntrainementFragment
         }
     }
 
@@ -25,6 +26,15 @@ class FragmentDetailEntrainementActivity  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_detail_entrainement, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val position = requireArguments().getInt(ARG_POSITION)
+
+        val EntrainementNamesArray = requireContext().resources.getStringArray(R.array.entrainement_names)
+
+
+        exerciceDetail.text = EntrainementNamesArray[position]
     }
 
 

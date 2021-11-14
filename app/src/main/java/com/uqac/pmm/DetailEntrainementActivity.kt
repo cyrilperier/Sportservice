@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.uqac.pmm.ui.main.SectionsPagerDetailEntrainementAdaptater
 import kotlinx.android.synthetic.main.activity_detail_entrainement.*
+import kotlinx.android.synthetic.main.activity_home.*
 
 class DetailEntrainementActivity : AppCompatActivity() {
 
@@ -31,8 +32,8 @@ class DetailEntrainementActivity : AppCompatActivity() {
 
         detailEntrainementViewPager.registerOnPageChangeCallback(detailEntrainementPageChangeCallback)
 
-        TabLayoutMediator(tabLayout, detailEntrainementViewPager) { tab, position ->
-            //To get the first name of doppelganger celebrities
+        TabLayoutMediator(tabLayoutEntrainement, detailEntrainementViewPager) { tab, position ->
+
             tab.text = detailEntrainementNamesArray[position].substringBefore(' ')
         }.attach()
 
