@@ -10,6 +10,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.Serializable
 import kotlin.collections.ArrayList
 
@@ -17,12 +21,34 @@ import kotlin.collections.HashMap
 
 
 class FireMissilesDialogFragment(array: Array<String>, map: LinkedHashMap<String, String>) : DialogFragment(){
-    val array = array
-    val map = map
+    var array = array
+    var map = map
+    var array2 = mutableListOf<String>()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val selectedItems = ArrayList<Int>() // Where we track the selected items
             val builder = AlertDialog.Builder(it)
+/*
+                val db = Firebase.firestore
+                val map2 = linkedMapOf<String, String>()
+                val user = Firebase.auth.currentUser
+                val uid = user?.uid
+                val docRef = db.collection("users").document("$uid")
+                    .collection("trainings")
+                docRef.get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            map2[document.id] = document.getString("title").toString()
+                            array2.add(document.getString("title").toString())
+                            Log.d("TAG", "${document.id} => ${document.data}")
+                            //Log.d("this is my array", "arr: " + Arrays.toString(array))
+                            Log.d("this is my map", map2.toString())
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d("TAG", "get failed with ", exception)
+                    }
+*/
             builder.setTitle("Select a training")
                 .setMultiChoiceItems(array, null,
                     DialogInterface.OnMultiChoiceClickListener { dialog, which, isChecked ->
@@ -61,4 +87,5 @@ class FireMissilesDialogFragment(array: Array<String>, map: LinkedHashMap<String
         }
 
     }
+
 }

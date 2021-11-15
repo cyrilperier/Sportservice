@@ -1,2 +1,3 @@
 # Sportservice
-Création d'un dialog sur un buttonListener, permettant de selectionner dans quel training ajouter l'exercice
+Création d'un dialog sur un buttonListener, ouvrant une alert dialog, permettant d'ajouter un training a la collection trainings
+
