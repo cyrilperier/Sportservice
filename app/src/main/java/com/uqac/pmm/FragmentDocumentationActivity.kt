@@ -2,6 +2,7 @@ package com.uqac.pmm
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,22 @@ class FragmentDocumentationActivity : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_activity_documentation, container, false)
 
-
+        val handler = Handler()
+// Define the code block to be executed
+// Define the code block to be executed
+        val runnableCode: Runnable = object : Runnable {
+            override fun run() {
+                // Do something here on the main thread
+                loadTrainings()
+                Log.d("Handlers", "Called on main thread")
+                // Repeat this the same runnable code block again another 2 seconds
+                // 'this' is referencing the Runnable object
+                handler.postDelayed(this, 1000)
+            }
+        }
+// Start the initial runnable task by posting through the handler
+// Start the initial runnable task by posting through the handler
+        handler.post(runnableCode)
         loadTrainings()
         pompes = v.findViewById(R.id.button_pompes)
         pompes?.setOnClickListener {
@@ -122,4 +138,5 @@ class FragmentDocumentationActivity : Fragment() {
                 Log.d("TAG", "Error getting documents.", exception)
             }
     }
+
 }
