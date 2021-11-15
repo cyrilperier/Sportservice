@@ -15,14 +15,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.io.Serializable
-import java.sql.Time
 import java.sql.Timestamp
 import java.util.*
-import kotlin.collections.ArrayList
-
-import kotlin.collections.HashMap
-import kotlin.collections.LinkedHashMap
 
 
 class DialogFragmentAddTraining() : DialogFragment(){
@@ -58,13 +52,11 @@ class DialogFragmentAddTraining() : DialogFragment(){
                 // Add action buttons
                 .setPositiveButton(R.string.ok,
                     DialogInterface.OnClickListener { dialog, id ->
-                        var date : Date = Date(selectedDay,selectedDay,selectedDay)
+
                         Log.d("Training name and date", "${text.text} on date : $selectedDay / $selectedMonth / $selectedYear")
+                        var timestamp_date = Timestamp(selectedYear,selectedMonth,selectedDay,0,0,0,0)
 
-
-                        //TODO addTrainingToUser(text,timestamp_date)
-
-
+                        addTrainingToUser(text.text.toString(),timestamp_date)
                     })
                     /*
                 .setNegativeButton(R.string.cancel,
@@ -74,17 +66,19 @@ class DialogFragmentAddTraining() : DialogFragment(){
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-    /*
-    protected fun addTrainingToUser(selectedItems: ArrayList<Int>) {
+
+    protected fun addTrainingToUser(text : String, date : Timestamp) {
         val user = Firebase.auth.currentUser
         val uid = user?.uid
         val db = Firebase.firestore
-        val exercise = "pompe"
-        for (i in selectedItems){
-            val tid = map.keys.toTypedArray()[i]
-            db.collection("users").document("$uid")
-                .collection("trainings").document("$tid")
-                .update("exercices", FieldValue.arrayUnion("$exercise"))
-        }
-    }*/
+        val training = hashMapOf(
+            "title" to text,
+            "date" to date
+        )
+
+        db.collection("users").document("$uid").collection("trainings")
+            .add(training)
+            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+    }
 }
