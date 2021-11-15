@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.password)
         login = findViewById(R.id.request)
 
-            //this.deleteDatabase ("entrainements-db") //Ne pas oublier de supprimer
+            this.deleteDatabase ("entrainements-db") //Ne pas oublier de supprimer
 
         auth = FirebaseAuth.getInstance()
         Log.d("TAG", auth.toString())

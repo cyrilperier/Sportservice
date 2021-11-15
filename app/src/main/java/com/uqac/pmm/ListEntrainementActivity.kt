@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -14,6 +15,10 @@ import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.list_entrainement_view.*
 import kotlinx.coroutines.runBlocking
+import android.content.Intent
+
+
+
 
 class ListEntrainementActivity :AppCompatActivity() {
 
@@ -52,12 +57,15 @@ class ListEntrainementActivity :AppCompatActivity() {
     fun read_entrainement() {
 
         val db = Firebase.firestore
-        db.collection("Entrainement")
+        val user = Firebase.auth.currentUser
+        val uid = user?.uid
+        db.collection("users").document("$uid")
+            .collection("trainings")
             .get()
             .addOnSuccessListener { result ->
                 Log.d("TEST", "avant " + result.toString())
                 entrainements = result.map {
-                    Entrainement(it.get("id").toString().toInt(), it.get("name").toString())
+                    Entrainement(it.get("id").toString().toInt(), it.get("title").toString())
                 }
                 Log.d("TEST", "entrainement " + entrainements.toString())
 
@@ -70,6 +78,9 @@ class ListEntrainementActivity :AppCompatActivity() {
                             Log.d("TEST", entrainement_database_local.toString())
                         } catch (e: Exception) {
                             entrainementDao.addEntrainement(it)
+                            val intent = intent
+                            finish()
+                            startActivity(intent)
                         }
 
                     }
