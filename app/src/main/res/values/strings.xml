@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Sport service</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_main2">MainActivity2</string>
+    <string name="app_name">Gym Helper</string>
+    <string name="title_activity_home">Gym Helper</string>
+    <string name="title_activity_main2">Gym Helper</string>
     <string name="pick_color"> Pick a color </string>
     <string name="ok">OK</string>
     <string name="password">Password</string>

@@ -23,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
     var auth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
         username = findViewById(R.id.username)

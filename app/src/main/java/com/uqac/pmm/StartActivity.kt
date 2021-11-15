@@ -13,6 +13,7 @@ class StartActivity : AppCompatActivity() {
     var register: Button? = null
     var sp: SharedPreferences? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_screen)
         loginBtn = findViewById(R.id.login)

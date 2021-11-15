@@ -20,7 +20,9 @@ Layout de selection des différents menus
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20sp"
         android:typeface="serif"
-        />
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="153dp" />
+
     <Button
         android:id="@+id/button_pompes"
         android:layout_width="213dp"

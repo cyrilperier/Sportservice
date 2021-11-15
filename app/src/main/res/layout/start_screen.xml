@@ -6,6 +6,8 @@
     android:orientation="vertical"
     tools:context=".StartActivity">
 
+
+
     <Button
         android:id="@+id/login"
         android:layout_width="161dp"
@@ -18,7 +20,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:background="@drawable/roundcorner"/>
 
     <Button
         android:id="@+id/register"
@@ -31,7 +34,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:background="@drawable/roundcorner"/>
+
+
 
 
 </RelativeLayout>
