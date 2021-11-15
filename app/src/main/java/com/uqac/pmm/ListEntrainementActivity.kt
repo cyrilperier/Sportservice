@@ -27,6 +27,7 @@ class ListEntrainementActivity :AppCompatActivity() {
     lateinit var entrainementDao: EntrainementDao
     val map = linkedMapOf<String, String>()
     val array = mutableListOf<String>()
+    var refrech=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_entrainement)
@@ -37,6 +38,7 @@ class ListEntrainementActivity :AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
+
     }
 
     override fun onStart() {
@@ -49,6 +51,8 @@ class ListEntrainementActivity :AppCompatActivity() {
             entrainements = entrainementDao.getAllEntrainements().toMutableList()
 
         }
+
+
 
 
 
@@ -65,7 +69,7 @@ class ListEntrainementActivity :AppCompatActivity() {
             .addOnSuccessListener { result ->
                 Log.d("TEST", "avant " + result.toString())
                 entrainements = result.map {
-                    Entrainement(it.get("id").toString().toInt(), it.get("title").toString())
+                    Entrainement(null,it.id, it.get("title").toString())
                 }
                 Log.d("TEST", "entrainement " + entrainements.toString())
 
@@ -74,13 +78,16 @@ class ListEntrainementActivity :AppCompatActivity() {
                     runBlocking {
                         try {
                             Log.d("TEST", "it : " + it.id.toString())
-                            val entrainement_database_local = entrainementDao.findByid(it.id)
+                            val entrainement_database_local = entrainementDao.findByid(it.idFirebase)
                             Log.d("TEST", entrainement_database_local.toString())
                         } catch (e: Exception) {
                             entrainementDao.addEntrainement(it)
-                            val intent = intent
-                            finish()
-                            startActivity(intent)
+
+                            if(refrech==false) {
+                                finish();
+                                startActivity(getIntent())
+                                refrech=true
+                            }else{}
                         }
 
                     }
