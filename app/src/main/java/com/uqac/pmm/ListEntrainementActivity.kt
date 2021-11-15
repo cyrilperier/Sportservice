@@ -16,8 +16,7 @@ import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.list_entrainement_view.*
 import kotlinx.coroutines.runBlocking
 import android.content.Intent
-
-
+import com.google.android.material.snackbar.Snackbar
 
 
 class ListEntrainementActivity :AppCompatActivity() {
@@ -29,6 +28,7 @@ class ListEntrainementActivity :AppCompatActivity() {
     val array = mutableListOf<String>()
     var refrech=false
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_entrainement)
 
@@ -38,6 +38,10 @@ class ListEntrainementActivity :AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
+        boutonFlottant_add_entrainement.setOnClickListener {
+
+
+            }
 
     }
 

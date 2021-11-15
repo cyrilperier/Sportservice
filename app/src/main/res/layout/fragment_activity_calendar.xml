@@ -5,17 +5,6 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/button_entrainement"
-        android:layout_width="185dp"
-        android:layout_height="57dp"
-        android:backgroundTint="#F44336"
-        android:fontFamily="serif"
-        android:text="Calendrier"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="20sp"
-        android:typeface="serif" />
-
-    <Button
         android:id="@+id/button_pompes"
         android:layout_width="213dp"
         android:layout_height="48dp"

@@ -16,17 +16,24 @@ class LoginActivity : AppCompatActivity() {
     var email: EditText? = null
     var password: EditText? = null
     var login: Button? = null
-
+    var loginBtn: Button? = null
+    var register: Button? = null
     var auth: FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
+        this.deleteDatabase ("entrainements-db") //Ne pas oublier de supprimer
+       connexion()
+       register()
+    }
+
+    fun connexion(){
         email = findViewById(R.id.email)
         password = findViewById(R.id.password)
         login = findViewById(R.id.request)
 
-            this.deleteDatabase ("entrainements-db") //Ne pas oublier de supprimer
+
 
         auth = FirebaseAuth.getInstance()
         Log.d("TAG", auth.toString())
@@ -50,6 +57,18 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
+        })
+    }
+    fun register(){
+
+        register = findViewById(R.id.register)
+        register?.setOnClickListener(View.OnClickListener {
+            startActivity(
+                Intent(
+                    this@LoginActivity,
+                    RegisterActivity::class.java
+                )
+            )
         })
     }
 }

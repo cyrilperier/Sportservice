@@ -14,7 +14,7 @@
         android:theme="@style/Theme.SportService">
 
         <activity
-            android:name=".StartActivity"
+            android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.SportService.NoActionBar">
@@ -27,13 +27,7 @@
         <activity
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".StartActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName="StartActivity"
+            android:parentActivityName=".LoginActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
