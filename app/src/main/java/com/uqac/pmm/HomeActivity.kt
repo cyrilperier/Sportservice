@@ -36,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, sectionViewPager) { tab, position ->
             tab.text = sectionNamesArray[position].substringBefore(' ')
         }.attach()
+
         val user = Firebase.auth.currentUser
         val uid = user?.uid
         Log.d("TAG","token mon boug :  $uid")

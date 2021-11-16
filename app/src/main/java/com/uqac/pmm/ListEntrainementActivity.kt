@@ -24,8 +24,6 @@ class ListEntrainementActivity :AppCompatActivity() {
     lateinit var entrainements: List<Entrainement>
     lateinit var database: EntrainementDataBase
     lateinit var entrainementDao: EntrainementDao
-    val map = linkedMapOf<String, String>()
-    val array = mutableListOf<String>()
     var refrech=false
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -67,12 +65,17 @@ class ListEntrainementActivity :AppCompatActivity() {
         val db = Firebase.firestore
         val user = Firebase.auth.currentUser
         val uid = user?.uid
+        val map = linkedMapOf<String, String>()
+        val array = mutableListOf<String>()
+
+
         db.collection("users").document("$uid")
             .collection("trainings")
             .get()
-            .addOnSuccessListener { result ->
-                Log.d("TEST", "avant " + result.toString())
-                entrainements = result.map {
+            .addOnSuccessListener { results ->
+
+                Log.d("TEST", "avant " + results.toString())
+                entrainements = results.map {
                     Entrainement(null,it.id, it.get("title").toString())
                 }
                 Log.d("TEST", "entrainement " + entrainements.toString())

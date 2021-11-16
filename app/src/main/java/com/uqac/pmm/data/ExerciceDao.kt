@@ -16,8 +16,8 @@ interface ExerciceDao {
     @Query("SELECT * FROM exercices WHERE name LIKE :name  LIMIT 1")
     suspend fun findByName(name: String): Exercice
 
-    @Query("SELECT * FROM exercices WHERE id LIKE :id  LIMIT 1")
-    suspend fun findByid(id: Int?): Exercice
+    @Query("SELECT * FROM exercices WHERE idFirebaseEntrainement LIKE :id  LIMIT 1")
+    suspend fun findByid(id: String?): Exercice
 
 
     @Insert

@@ -12,7 +12,8 @@ enum class Type{
 @Entity(tableName = "exercices")
 data class Exercice(
     @PrimaryKey(autoGenerate = true) val id: Int?,
-    val name:String,
-    val type: Type
+    val idFirebaseEntrainement:String?,
+    val name:String?,
+    val type: Type?
 
 ){}

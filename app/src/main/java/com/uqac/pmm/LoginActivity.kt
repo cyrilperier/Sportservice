@@ -24,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
         this.deleteDatabase ("entrainements-db") //Ne pas oublier de supprimer
+        this.deleteDatabase ("exercices-db") //Ne pas oublier de supprimer
        connexion()
        register()
     }

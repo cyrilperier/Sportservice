@@ -39,6 +39,7 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
             with(it.context){
                 val intent = Intent(this, DetailEntrainementActivity::class.java)
                 intent.putExtra("entrainement_name",entrainement.name )
+                intent.putExtra("idFirebase",entrainement.idFirebase)
                 startActivity(intent)
 
             }
