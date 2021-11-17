@@ -20,6 +20,7 @@ class DetailEntrainementActivity : AppCompatActivity() {
     lateinit var exercices: List<Exercice>
     private lateinit var detailEntrainementNamesArray: Array<String>
     var array = mutableListOf<String>()
+    var arrayid = mutableListOf<String>()
     val list = mutableListOf<String>()
     lateinit var idFirebase: String
     var refrech=false
@@ -63,9 +64,11 @@ class DetailEntrainementActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { result ->
                     array = result.map{it.get("name").toString()} as MutableList<String>
+                arrayid = result.map{
+                    it.id} as MutableList<String>
                 Log.d("DETAIL","array"+array)
                 detailEntrainementNamesArray= array.toTypedArray()
-                val detailEntrainementAdaptater = SectionsPagerDetailEntrainementAdaptater(this, detailEntrainementNamesArray.size)
+                val detailEntrainementAdaptater = SectionsPagerDetailEntrainementAdaptater(this, detailEntrainementNamesArray.size,idFirebase,arrayid)
                 detailEntrainementViewPager.adapter = detailEntrainementAdaptater
 
 
