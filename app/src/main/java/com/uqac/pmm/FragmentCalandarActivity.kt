@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 
 class FragmentCalandarActivity : Fragment() {
     private var pompes: Button? = null
-    private var addtraining: Button? = null
     val db = Firebase.firestore
     val map = linkedMapOf<String, String>()
     val array = mutableListOf<String>()
@@ -61,13 +60,6 @@ class FragmentCalandarActivity : Fragment() {
 
         }
 
-        addtraining = v.findViewById(R.id.button_add_training)
-        addtraining?.setOnClickListener {
-            confirmFireMissiles()
-            Log.d("TAG","addtraining lancé")
-
-        }
-
         return v
     }
     private fun openDialog(v: View?, map: LinkedHashMap<String, String>) {
@@ -79,10 +71,7 @@ class FragmentCalandarActivity : Fragment() {
         val newFragment = FireMissilesDialogFragment(array,map)
         fragmentManager?.let { newFragment.show(it, "missiles") }
     }
-    fun confirmFireMissiles() {
-        val newFragment = DialogFragmentAddTraining()
-        fragmentManager?.let { newFragment.show(it, "missiles") }
-    }
+
     fun loadTrainings() {
         val db = Firebase.firestore
         val docRef = db.collection("users").document("$uid")

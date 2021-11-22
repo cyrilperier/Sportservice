@@ -2,12 +2,13 @@ package com.uqac.pmm
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.data.EntrainementDao
 import com.uqac.pmm.data.EntrainementDataBase
@@ -15,8 +16,6 @@ import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.list_entrainement_view.*
 import kotlinx.coroutines.runBlocking
-import android.content.Intent
-import com.google.android.material.snackbar.Snackbar
 
 
 class ListEntrainementActivity :AppCompatActivity() {
@@ -28,7 +27,7 @@ class ListEntrainementActivity :AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_entrainement)
+        val v = setContentView(R.layout.activity_list_entrainement)
 
         list_entrainements_recyclerview.layoutManager =
             LinearLayoutManager(
@@ -36,9 +35,8 @@ class ListEntrainementActivity :AppCompatActivity() {
                 LinearLayoutManager.VERTICAL,
                 false
             )
-        boutonFlottant_add_entrainement.setOnClickListener {
-
-
+        addTraining.setOnClickListener {
+                confirmFireMissiles()
             }
 
     }
@@ -54,11 +52,13 @@ class ListEntrainementActivity :AppCompatActivity() {
 
         }
 
-
-
-
-
     }
+
+    fun confirmFireMissiles() {
+        val newFragment = DialogFragmentAddTraining()
+        supportFragmentManager.let { newFragment.show(it, "missiles") }
+    }
+
 
     fun read_entrainement() {
 
