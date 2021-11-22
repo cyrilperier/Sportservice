@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -16,8 +17,7 @@ class LoginActivity : AppCompatActivity() {
     var email: EditText? = null
     var password: EditText? = null
     var login: Button? = null
-    var loginBtn: Button? = null
-    var register: Button? = null
+    var register: TextView? = null
     var auth: FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)

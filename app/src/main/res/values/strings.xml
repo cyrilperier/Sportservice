@@ -6,8 +6,10 @@
     <string name="ok">OK</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="username">Username</string>
     <string name="identifiant">Identification</string>
-
+    <string name="register_here"><u>First timer? Click here to sign up</u></string>
+    <string name="login_here"><u>Already a pro? Click here to sign in</u></string>
     <string-array name="section_names">
         <item>Profil</item>
         <item>Documentation</item>

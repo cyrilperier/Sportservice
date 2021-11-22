@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.regex.Pattern
@@ -19,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
     private var username: EditText? = null
     private var email: EditText? = null
     private var password: EditText? = null
+    var login: TextView? = null
     var request: Button? = null
     var auth: FirebaseAuth? = null
 
@@ -27,12 +29,16 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
         username = findViewById(R.id.username)
-        email = findViewById(R.id.emailRegister)
-        password = findViewById(R.id.passwordRegister)
+        email = findViewById(R.id.email)
+        password = findViewById(R.id.password)
         request = findViewById(R.id.request)
         auth = FirebaseAuth.getInstance()
         request?.setOnClickListener {
             register(username?.text.toString(), email?.text.toString(), password?.text.toString())
+        }
+        login = findViewById(R.id.login)
+        login?.setOnClickListener {
+            startActivity(Intent(this@RegisterActivity,LoginActivity::class.java))
         }
     }
 
