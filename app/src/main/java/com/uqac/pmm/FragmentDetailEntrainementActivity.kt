@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.firebase.auth.ktx.auth
@@ -15,9 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.data.SerieDao
 import com.uqac.pmm.data.SerieDataBase
 import com.uqac.pmm.model.Serie
-import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.activity_list_serie.*
-import kotlinx.android.synthetic.main.fragment_detail_entrainement.*
 import kotlinx.coroutines.runBlocking
 
 class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebaseExercice:List<String>)  : Fragment() {
@@ -30,6 +27,8 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
     var idFirebaseEntrainement=idFirebaseEntrainement
     var idFirebaseExercice=idFirebaseExercice
     var refrech=false
+    lateinit var idExercice : String
+    var cxt = context
 
     companion object {
         const val ARG_POSITION = "position"
@@ -66,10 +65,20 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
 
         exerciceDetail.text = EntrainementNamesArray[position]
         */
+        idExercice=idFirebaseExercice[position]
         Dao()
         read_entrainement()
 
 
+
+/*
+        recycler_view.apply {
+            // set a LinearLayoutManager to handle Android
+            // RecyclerView behavior
+            layoutManager = LinearLayoutManager(activity)
+            // set the custom adapter to the RecyclerView
+            adapter = ListSerieAdapter(series,context)
+        } */
 
 
     }
@@ -80,20 +89,20 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
         val uid = user?.uid
         val map = linkedMapOf<String, String>()
         val array = mutableListOf<String>()
-        Log.d("TEST", "avant " + id)
-        for (id in idFirebaseExercice) {
-            Log.d("TEST", "avant " + id)
+            Log.d("TEST", "id exercice " + uid)
+            Log.d("TEST", "id entrainement " + idFirebaseEntrainement)
+            Log.d("TEST", "id exercice " + idExercice)
 
         db.collection("users")
             .document("$uid")
             .collection("trainings")
-            .document("$idFirebaseEntrainement ")
+            .document("$idFirebaseEntrainement")
             .collection("exercices")
-            .document("$id")
+            .document("$idExercice")
             .collection("serie")
             .get()
             .addOnSuccessListener { results ->
-                Log.d("TEST", "entrainement " + results)
+
                 series = results.map {
                     Serie(null,it.id,
                         it.get("name").toString(),
@@ -101,24 +110,14 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
                         it.get("repetition").toString().toInt())
                 }
 
-                Log.d("TEST", "entrainement " + results.documents)
+                Log.d("TEST", "serie " + series)
 
-                series.map {
-                    Log.d("TEST", "avant " + it.id.toString())
-                    runBlocking {
-                        try {
-                            Log.d("TEST", "it : " + it.id.toString())
-                            val entrainement_database_local = serieDao.findByid(it.idFirebaseExercice)
-                            Log.d("TEST", entrainement_database_local.toString())
-                        } catch (e: Exception) {
-                            serieDao.addSerie(it)
-                        }
-                    }
-                }
+
+                list_series_recyclerview.adapter =
+                    cxt?.let { ListSerieAdapter(series, it) }
             }
-        Log.d("TEST", "map "+ map.toString())
-        Log.d("TEST", "array "+ array.toString())
-        }
+
+
 
         runBlocking {
             series = serieDao.getAllSeries().toMutableList()

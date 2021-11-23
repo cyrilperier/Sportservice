@@ -74,17 +74,17 @@ class ListEntrainementActivity :AppCompatActivity() {
             .get()
             .addOnSuccessListener { results ->
 
-                Log.d("TEST", "avant " + results.toString())
+
                 entrainements = results.map {
                     Entrainement(null,it.id, it.get("title").toString())
                 }
-                Log.d("TEST", "entrainement " + entrainements.toString())
+
 
                 entrainements.map {
-                    Log.d("TEST", "avant " + it.id.toString())
+
                     runBlocking {
                         try {
-                            Log.d("TEST", "it : " + it.id.toString())
+
                             val entrainement_database_local = entrainementDao.findByid(it.idFirebase)
                             Log.d("TEST", entrainement_database_local.toString())
                         } catch (e: Exception) {
@@ -100,13 +100,12 @@ class ListEntrainementActivity :AppCompatActivity() {
                     }
                 }
             }
-                    Log.d("TEST", "map "+ map.toString())
-                    Log.d("TEST", "array "+ array.toString())
+
 
 
         runBlocking {
             entrainements = entrainementDao.getAllEntrainements().toMutableList()
-Log.d("TEST","local "+ entrainements.toString())
+
         list_entrainements_recyclerview.adapter =
             ListEntrainementAdapter(entrainements, this@ListEntrainementActivity)
     }

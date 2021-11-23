@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_list_serie.*
 import kotlinx.coroutines.runBlocking
 
 class ListSerieActivity : AppCompatActivity(){
-/*
+
     lateinit var series: List<Serie>
     lateinit var database: SerieDataBase
     lateinit var serieDao: SerieDao
@@ -118,6 +118,6 @@ class ListSerieActivity : AppCompatActivity(){
         ).build()
         serieDao = database.getSerieDao()
     }
-    */
+
 
 }
