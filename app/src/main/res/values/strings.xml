@@ -17,6 +17,10 @@
         <item>Calendrier</item>
 
     </string-array>
+    <string-array name="spinner_unite_poids">
+        <item>Lbs</item>
+        <item>Kg</item>
+    </string-array>
 
     <string-array name="entrainement_names">
         <item>Exercice 1</item>

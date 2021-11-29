@@ -92,7 +92,7 @@ Log.d("TEST",position.toString())
             .addOnSuccessListener { results ->
 
                 series = results.map {
-                    Serie(null,it.id,
+                    Serie(null,idFirebaseEntrainement,idExercice,it.id,
                         it.get("name").toString(),
                         it.get("poids").toString().toInt(),
                         it.get("repetition").toString().toInt())

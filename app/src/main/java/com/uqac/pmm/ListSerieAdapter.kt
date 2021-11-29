@@ -1,13 +1,14 @@
 package com.uqac.pmm
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.model.Serie
-import kotlinx.android.synthetic.main.list_entrainement_view.view.*
 import kotlinx.android.synthetic.main.list_entrainement_view.view.entrainement_name_textview
 import kotlinx.android.synthetic.main.list_serie_view.view.*
 
@@ -36,12 +37,44 @@ class ListSerieAdapter(val series : List<Serie>, val context : Context) : Recycl
             val serie: Serie= series[position]
             holder.serieView.serie_name_textview.text=
                 "${serie.name} "
-            holder.serieView.serie_poids_textview.text=
-                "${serie.poids}"
+            holder.serieView.serie_poids_textview.setText("${serie.poids}")
+            holder.serieView.serie_repetition_textview.setText("${serie.repetition}")
+
+
+
+holder.serieView.serie_valider_button.setOnClickListener {
+    var poids = holder.serieView.serie_poids_textview.text.toString().toInt()
+    var repetition = holder.serieView.serie_repetition_textview.text.toString().toInt()
+    modify_serie(serie.idFirebaseEntrainement,serie.idFirebaseExercice,serie.idFirebaseSerie,poids,repetition)
+}
+
 
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = series.size
+
+    fun modify_serie(
+        idFirebaseEntrainement:String?,
+        idExercice:String?,
+        idSerie:String?,
+        poids: Int?,
+        repetition:Int?)  {
+        val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
+        val uid = user?.uid
+        db.collection("users")
+            .document("$uid")
+            .collection("trainings")
+            .document("$idFirebaseEntrainement")
+            .collection("exercices")
+            .document("$idExercice")
+            .collection("serie")
+            .document("$idSerie")
+            .update("poids", poids,"repetition",repetition)
+
+
+        }
+
 
     }
