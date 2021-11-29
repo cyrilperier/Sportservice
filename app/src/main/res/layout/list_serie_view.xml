@@ -8,14 +8,14 @@
     android:gravity="center_vertical"
     >
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/roundcorner"
+        android:orientation="vertical"
         >
 
         <TextView
-            android:id="@+id/entrainement_name_textview"
+            android:id="@+id/serie_name_textview"
             tools:text="nom"
             android:layout_margin="8dp"
             android:layout_gravity="center_vertical"
@@ -23,6 +23,16 @@
             android:layout_height="wrap_content"
 
             />
+        <TextView
+            android:id="@+id/serie_poids_textview"
+            tools:text="nom"
+            android:layout_margin="8dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
 
 
 

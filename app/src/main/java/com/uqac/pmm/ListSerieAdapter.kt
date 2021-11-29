@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.uqac.pmm.model.Serie
 import kotlinx.android.synthetic.main.list_entrainement_view.view.*
+import kotlinx.android.synthetic.main.list_entrainement_view.view.entrainement_name_textview
+import kotlinx.android.synthetic.main.list_serie_view.view.*
 
 
 class ListSerieAdapter(val series : List<Serie>, val context : Context) : RecyclerView.Adapter<ListSerieAdapter.SerieViewHolder>()
@@ -24,7 +26,7 @@ class ListSerieAdapter(val series : List<Serie>, val context : Context) : Recycl
         // Create new views (invoked by the layout manager)
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SerieViewHolder {
             val layoutInflater : LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInflater.inflate(R.layout.list_entrainement_view, parent, false)
+            val view: View = layoutInflater.inflate(R.layout.list_serie_view, parent, false)
 
             return SerieViewHolder(view)
         }
@@ -32,8 +34,10 @@ class ListSerieAdapter(val series : List<Serie>, val context : Context) : Recycl
         // Replace the contents of a view (invoked by the layout manager)
         override fun onBindViewHolder(holder: SerieViewHolder, position: Int)  {
             val serie: Serie= series[position]
-            holder.serieView.entrainement_name_textview.text=
+            holder.serieView.serie_name_textview.text=
                 "${serie.name} "
+            holder.serieView.serie_poids_textview.text=
+                "${serie.poids}"
 
         }
 

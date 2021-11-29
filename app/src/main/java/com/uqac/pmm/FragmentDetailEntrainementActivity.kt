@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -15,20 +15,20 @@ import com.uqac.pmm.data.SerieDao
 import com.uqac.pmm.data.SerieDataBase
 import com.uqac.pmm.model.Serie
 import kotlinx.android.synthetic.main.activity_list_serie.*
-import kotlinx.coroutines.runBlocking
+
 
 class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebaseExercice:List<String>)  : Fragment() {
 
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter: RecyclerView.Adapter<ListSerieAdapter.SerieViewHolder>? = null
+
+
+
     lateinit var series: List<Serie>
     lateinit var database: SerieDataBase
     lateinit var serieDao: SerieDao
     var idFirebaseEntrainement=idFirebaseEntrainement
     var idFirebaseExercice=idFirebaseExercice
-    var refrech=false
     lateinit var idExercice : String
-    var cxt = context
+
 
     companion object {
         const val ARG_POSITION = "position"
@@ -53,32 +53,22 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detail_entrainement, container, false)
+        return inflater.inflate(R.layout.activity_list_serie, container, true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val position = requireArguments().getInt(ARG_POSITION)
-/*
-        val EntrainementNamesArray = requireContext().resources.getStringArray(R.array.entrainement_names)
 
 
-        exerciceDetail.text = EntrainementNamesArray[position]
-        */
         idExercice=idFirebaseExercice[position]
+
         Dao()
         read_entrainement()
+Log.d("TEST",position.toString())
 
 
 
-/*
-        recycler_view.apply {
-            // set a LinearLayoutManager to handle Android
-            // RecyclerView behavior
-            layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-            adapter = ListSerieAdapter(series,context)
-        } */
 
 
     }
@@ -87,8 +77,6 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
         val db = Firebase.firestore
         val user = Firebase.auth.currentUser
         val uid = user?.uid
-        val map = linkedMapOf<String, String>()
-        val array = mutableListOf<String>()
             Log.d("TEST", "id exercice " + uid)
             Log.d("TEST", "id entrainement " + idFirebaseEntrainement)
             Log.d("TEST", "id exercice " + idExercice)
@@ -112,18 +100,21 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
 
                 Log.d("TEST", "serie " + series)
 
+               // list_series_recyclerview.adapter = ListSerieAdapter(series, getActivity())
 
-                list_series_recyclerview.adapter =
-                    cxt?.let { ListSerieAdapter(series, it) }
+                list_series_recyclerview.apply {
+                    // set a LinearLayoutManager to handle Android
+                    // RecyclerView behavior
+                    layoutManager = LinearLayoutManager(activity)
+                    // set the custom adapter to the RecyclerView
+                    adapter = context?.let { ListSerieAdapter(series, it) }
+                }
+
             }
 
 
 
-        runBlocking {
-            series = serieDao.getAllSeries().toMutableList()
-            Log.d("TEST","local "+ series.toString())
 
-        }
 
 
     }
