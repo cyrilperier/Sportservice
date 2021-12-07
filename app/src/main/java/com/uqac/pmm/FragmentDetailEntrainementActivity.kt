@@ -14,7 +14,9 @@ import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.data.SerieDao
 import com.uqac.pmm.data.SerieDataBase
 import com.uqac.pmm.model.Serie
+import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.activity_list_serie.*
+import kotlin.concurrent.fixedRateTimer
 
 
 class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebaseExercice:List<String>)  : Fragment() {
@@ -67,6 +69,10 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
         read_entrainement()
 Log.d("TEST",position.toString())
 
+        addExercice.setOnClickListener {
+            confirmFireMissiles()
+        }
+
 
 
 
@@ -110,6 +116,8 @@ Log.d("TEST",position.toString())
                     adapter = context?.let { ListSerieAdapter(series, it) }
                 }
 
+
+
             }
 
 
@@ -118,6 +126,16 @@ Log.d("TEST",position.toString())
 
 
     }
+
+    fun confirmFireMissiles() {
+        val newFragment = DialogFragmentAddTraining()
+        fragmentManager.let {
+            if (it != null) {
+                newFragment.show(it, "missiles")
+            }
+        }
+    }
+
     private fun Dao(){
         //accés a la base
         database = context?.let {

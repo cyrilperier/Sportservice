@@ -1,6 +1,5 @@
 package com.uqac.pmm
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -68,7 +67,7 @@ class FragmentCalandarActivity : Fragment() {
             array2.add(v.value)
         }
         val array = array2.toTypedArray()
-        val newFragment = FireMissilesDialogFragment(array,map)
+        val newFragment = FireMissilesDialogFragmentAddTraining(array,map)
         fragmentManager?.let { newFragment.show(it, "missiles") }
     }
 

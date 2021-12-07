@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
-class FireMissilesDialogFragment(array: Array<String>, map: LinkedHashMap<String, String>) : DialogFragment(){
+class FireMissilesDialogFragmentAddTraining(array: Array<String>, map: LinkedHashMap<String, String>) : DialogFragment(){
     var array = array
     var map = map
     var array2 = mutableListOf<String>()

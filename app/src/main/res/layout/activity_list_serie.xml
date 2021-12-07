@@ -12,6 +12,16 @@
         android:layout_height="match_parent"
         android:text="test"
         />
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addExercice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        android:background="#FF9800"
+        android:backgroundTint="#FF9800"
+        android:backgroundTintMode="add"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </FrameLayout>
