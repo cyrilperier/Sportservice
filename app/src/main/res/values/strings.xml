@@ -4,13 +4,19 @@
     <string name="title_activity_main2">Gym Helper</string>
     <string name="pick_color"> Pick a color </string>
     <string name="ok">OK</string>
-    <string name="password">Password</string>
+    <string name="password">Mot de passe</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="identifiant">Identification</string>
     <string name="register_here"><u>First timer? Click here to sign up</u></string>
     <string name="login_here"><u>Already a pro? Click here to sign in</u></string>
     <string name="element_text" >"salut"</string>
+    <string name="Firstname">Prénom</string>
+    <string name="lastname">Nom</string>
+
+    <string name="weight">Poids (facultatif)</string>
+    <string name="age">Age (facultatif)</string>
+    <string name="height">Taille</string>
     <string-array name="section_names">
         <item>Profil</item>
         <item>Documentation</item>
