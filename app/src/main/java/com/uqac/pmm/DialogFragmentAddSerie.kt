@@ -18,45 +18,46 @@ import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 import java.util.*
 
-class DialogFragmentAddSerie  : DialogFragment(){
-
+class DialogFragmentAddSerie(idFirebaseEntrainement:String,idExercice:String,nbSerie:String)  : DialogFragment(){
+    var idFirebaseEntrainement=idFirebaseEntrainement
+    var idExercice=idExercice
+    var nbSerie=nbSerie
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             // Get the layout inflater
             var inflater : LayoutInflater = requireActivity().layoutInflater
-            var view : View = inflater.inflate(R.layout.add_training_to_user,null)
-
-            var text : EditText = view.findViewById(R.id.trainingTitle)
-            val c = Calendar.getInstance()
-
-
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
+            var view : View = inflater.inflate(R.layout.add_serie_to_exercice,null)
+            var btn : Button = view.findViewById(R.id.add_serie_button)
+            var poids : EditText = view.findViewById(R.id.Poids_edit_text)
+            val repetition : EditText = view.findViewById(R.id.repetition_edit_text)
             builder.setView(view)
-                // Add action buttons
-                .setPositiveButton(R.string.ok,
-                    DialogInterface.OnClickListener { dialog, id ->
+            btn.setOnClickListener { addSerieToExercice(poids.text.toString(),repetition.text.toString(),nbSerie)
+            }
 
-
-                        addTrainingToUser(text.text.toString())
-                    })
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    protected fun addTrainingToUser(text : String) {
+    protected fun addSerieToExercice(poids : String,repetition: String,nbSerie :String) {
         val user = Firebase.auth.currentUser
         val uid = user?.uid
         val db = Firebase.firestore
-        val training = hashMapOf(
-            "title" to text,
-            
+        val serie = hashMapOf(
+            "name" to "Serie "+nbSerie,
+            "poids" to poids,
+            "repetition" to repetition,
         )
 
-        db.collection("users").document("$uid").collection("trainings")
-            .add(training)
+        db.collection("users")
+            .document("$uid")
+            .collection("trainings")
+            .document("$idFirebaseEntrainement")
+            .collection("exercices")
+            .document("$idExercice")
+            .collection("serie")
+            .add(serie)
             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
 

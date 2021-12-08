@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    >
 
     <TextView
         android:id="@+id/poids_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Poids" />
+        android:text="Poids"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/Poids_edit_text"
         android:layout_width="match_parent"
@@ -20,15 +24,20 @@
         android:id="@+id/repetition_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Repetition" />
+        android:text="Repetition"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/repetition_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-
-
-
+    <Button
+        android:id="@+id/add_serie_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter série" />
 
 
 </LinearLayout>

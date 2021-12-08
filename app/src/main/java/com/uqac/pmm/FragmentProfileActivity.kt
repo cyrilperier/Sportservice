@@ -31,6 +31,4 @@ class FragmentProfileActivity : Fragment() {
         return v
     }
 
-
-
 }

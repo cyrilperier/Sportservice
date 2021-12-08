@@ -29,6 +29,7 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
     lateinit var serieDao: SerieDao
     var idFirebaseEntrainement=idFirebaseEntrainement
     var idFirebaseExercice=idFirebaseExercice
+    lateinit var nbSerie:String
     lateinit var idExercice : String
 
 
@@ -96,7 +97,7 @@ Log.d("TEST",position.toString())
             .collection("serie")
             .get()
             .addOnSuccessListener { results ->
-
+               nbSerie= (results.size()+1).toString()
                 series = results.map {
                     Serie(null,idFirebaseEntrainement,idExercice,it.id,
                         it.get("name").toString(),
@@ -128,7 +129,7 @@ Log.d("TEST",position.toString())
     }
 
     fun confirmFireMissiles() {
-        val newFragment = DialogFragmentAddTraining()
+        val newFragment = DialogFragmentAddSerie(idFirebaseEntrainement,idExercice,nbSerie)
         fragmentManager.let {
             if (it != null) {
                 newFragment.show(it, "missiles")
