@@ -17,7 +17,11 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
-    private var username: EditText? = null
+    private var firstname: EditText? = null
+    private var lastname: EditText? = null
+    private var age: EditText? = null
+    private var weight: EditText? = null
+    private var height: EditText? = null
     private var email: EditText? = null
     private var password: EditText? = null
     var login: TextView? = null
@@ -28,13 +32,17 @@ class RegisterActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register)
-        username = findViewById(R.id.username)
+        firstname = findViewById(R.id.firstname)
+        lastname = findViewById(R.id.lastname)
+        age = findViewById(R.id.age)
+        weight = findViewById(R.id.weight)
+        height = findViewById(R.id.height)
         email = findViewById(R.id.email)
         password = findViewById(R.id.password)
         request = findViewById(R.id.request)
         auth = FirebaseAuth.getInstance()
         request?.setOnClickListener {
-            register(username?.text.toString(), email?.text.toString(), password?.text.toString())
+            register(firstname?.text.toString(),lastname?.text.toString(), email?.text.toString(), password?.text.toString(),height?.text.toString(),weight?.text.toString(),age?.text.toString())
         }
         login = findViewById(R.id.login)
         login?.setOnClickListener {
@@ -42,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun register(username: String, email: String, password: String) {
+    private fun register(firstname: String,lastname: String, email: String, password: String,height:String,weight:String,age:String) {
         auth?.createUserWithEmailAndPassword(email, password)
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -52,7 +60,11 @@ class RegisterActivity : AppCompatActivity() {
                     val uid = user?.uid
                     val db = Firebase.firestore
                     val name = hashMapOf(
-                        "username" to username,
+                        "firstname" to firstname,
+                        "lastname" to lastname,
+                        "height" to height,
+                        "weight" to weight,
+                        "age" to age,
                     )
                     db.collection("users").document("$uid").set(name)
                     val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
