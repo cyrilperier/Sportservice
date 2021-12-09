@@ -13,7 +13,8 @@
     <string name="element_text" >"salut"</string>
     <string name="Firstname">Prénom</string>
     <string name="lastname">Nom</string>
-
+    <string name="cancel">Annuler</string>
+    <string name="exercise_picker">exercise_picker</string>
     <string name="weight">Poids (facultatif)</string>
     <string name="age">Age (facultatif)</string>
     <string name="height">Taille</string>
