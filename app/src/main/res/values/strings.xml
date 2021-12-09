@@ -4,7 +4,9 @@
     <string name="title_activity_main2">Gym Helper</string>
     <string name="pick_color"> Pick a color </string>
     <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
     <string name="password">Password</string>
+    <string name="exercise_picker">Pick your exercise</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="identifiant">Identification</string>
@@ -23,9 +25,8 @@
     </string-array>
 
     <string-array name="entrainement_names">
-        <item>Exercice 1</item>
-        <item>Exercice 2</item>
-        <item>Exercice 3</item>
-
+        <item>pompes</item>
+        <item>tractions</item>
+        <item>squats lestées</item>
     </string-array>
 </resources>

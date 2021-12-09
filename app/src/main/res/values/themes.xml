@@ -28,5 +28,28 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="materialAlertDialogTheme">@style/MyDialogTheme</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@drawable/shape</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:checkedButton">@color/colorPrimary</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorMultiSelectHighlight">@color/colorPrimary</item>
+        <item name="android:textColorAlertDialogListItem">@color/white</item>
+        <item name="android:colorPressedHighlight">@color/white</item>
+        <item name="android:color">@color/white</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 </resources>
