@@ -32,9 +32,11 @@ class DialogFragmentAddSerie(idFirebaseEntrainement:String,idExercice:String,nbS
             var poids : EditText = view.findViewById(R.id.Poids_edit_text)
             val repetition : EditText = view.findViewById(R.id.repetition_edit_text)
             builder.setView(view)
-            btn.setOnClickListener { addSerieToExercice(poids.text.toString(),repetition.text.toString(),nbSerie)
-            }
 
+            btn.setOnClickListener {
+                addSerieToExercice(poids.text.toString(),repetition.text.toString(),nbSerie)
+                dismiss()
+            }
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
