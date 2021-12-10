@@ -25,8 +25,6 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
 
 
     lateinit var series: List<Serie>
-    lateinit var database: SerieDataBase
-    lateinit var serieDao: SerieDao
     var idFirebaseEntrainement=idFirebaseEntrainement
     var idFirebaseExercice=idFirebaseExercice
     lateinit var nbSerie:String
@@ -66,17 +64,12 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
 
         idExercice=idFirebaseExercice[position]
 
-        Dao()
         read_entrainement()
 Log.d("TEST",position.toString())
 
         addExercice.setOnClickListener {
             confirmFireMissiles()
         }
-
-
-
-
 
     }
     fun read_entrainement() {
@@ -137,15 +130,6 @@ Log.d("TEST",position.toString())
         }
     }
 
-    private fun Dao(){
-        //accés a la base
-        database = context?.let {
-            Room.databaseBuilder(
-                it, SerieDataBase::class.java, "serie-db"
 
-            ).build()
-        }!!
-        serieDao = database.getSerieDao()
-    }
 
     }

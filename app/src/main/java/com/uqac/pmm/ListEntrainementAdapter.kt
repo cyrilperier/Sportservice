@@ -10,7 +10,7 @@ import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.list_entrainement_view.view.*
 
 
-class ListEntrainementAdapter (val entrainements : List<Entrainement>, val context : Context) : RecyclerView.Adapter<ListEntrainementAdapter.EntrainementViewHolder>() {
+class ListEntrainementAdapter (val entrainements : List<Entrainement>, val context : Context) : RecyclerView.Adapter<com.uqac.pmm.ListEntrainementAdapter.EntrainementViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using

@@ -24,8 +24,6 @@ class DetailEntrainementActivity : AppCompatActivity() {
     val list = mutableListOf<String>()
     lateinit var idFirebase: String
     var refrech=false
-    lateinit var database: ExerciceDataBase
-    lateinit var exerciceDao: ExerciceDao
     private var detailEntrainementPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
     }

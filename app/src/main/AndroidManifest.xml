@@ -53,7 +53,7 @@
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".ListSerieActivity"
+            android:name=".ListExerciceActivity"
             android:exported="true"
             tools:ignore="Instantiatable" />
     </application>
