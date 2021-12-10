@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.uqac.pmm.model.Exercice
+import com.uqac.pmm.model.Type
 import kotlinx.android.synthetic.main.list_entrainement_view.view.*
 import kotlinx.android.synthetic.main.list_entrainement_view.view.entrainement_name_textview
 import kotlinx.android.synthetic.main.list_exercice_view.view.*
@@ -39,9 +40,22 @@ class ListExerciceAdapter (val exercices : List<Exercice>, val context : Context
         holder.exerciceView.setOnClickListener{
 
             with(it.context){
-                val intent = Intent(this, DetailEntrainementActivity::class.java)
+
+                var type= (
+                        when (exercice.type) {
+                            Type.SANSMACHINE-> "SANSMACHINE"
+                            Type.MACHINE-> "MACHINE"
+                            Type.ECHAUFFEMENT->  "ECHAUFFEMENT"
+                            Type.ETIREMENT -> "ETIREMENT"
+                            else -> "SANSMACHINE"
+                        })
+
+                val intent = Intent(this, DetailExerciceActivity::class.java)
                 intent.putExtra("exercice_name",exercice.name )
-               // intent.putExtra("idFirebase",exercice.idFirebase)
+               intent.putExtra("exercice_type",type)
+                intent.putExtra("exercice_image",exercice.url_image)
+                intent.putExtra("exercice_description",exercice.description)
+                intent.putExtra("exercice_zone",exercice.zone)
                 startActivity(intent)
 
             }

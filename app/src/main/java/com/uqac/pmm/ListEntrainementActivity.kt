@@ -1,19 +1,15 @@
 package com.uqac.pmm
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.uqac.pmm.data.EntrainementDao
-import com.uqac.pmm.data.EntrainementDataBase
 import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.list_entrainement_view.*
-import kotlinx.coroutines.runBlocking
+
 
 
 class ListEntrainementActivity :AppCompatActivity() {

@@ -11,11 +11,7 @@ enum class Type{
 }
 
 
-enum class Zone{
 
-    BACK,BICEPS,TRICEPS,PECTORALS,SHOULDERS,LEGS,ABDOMINALS
-
-}
 
 @Entity(tableName = "exercices")
 data class Exercice(
@@ -23,6 +19,8 @@ data class Exercice(
     val idFirebaseEntrainement:String?,
     val name:String?,
     val type: Type?,
-    val zone: Zone?
+    val zone: String,
+    val url_image:String?,
+    val description:String?
 
 ){}

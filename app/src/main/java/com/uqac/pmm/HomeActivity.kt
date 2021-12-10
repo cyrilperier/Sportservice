@@ -73,20 +73,6 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    //ADD A TRAINING TO THE USER'S TRAINING COLLECTION
-    protected fun addTraining(uid: String?, training: HashMap<String, Serializable>) {
-
-        val db = Firebase.firestore
-        db.collection("users").document("$uid")
-            .collection("trainings")
-            .add(training)
-            .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.d("TAG", "Error adding document", e)
-            }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
