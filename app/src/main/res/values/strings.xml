@@ -14,10 +14,10 @@
     <string name="Firstname">Prénom</string>
     <string name="lastname">Nom</string>
     <string name="cancel">Annuler</string>
-    <string name="exercise_picker">exercise_picker</string>
+    <string name="exercise_picker">Pick exercise</string>
     <string name="weight">Poids (facultatif)</string>
     <string name="age">Age (facultatif)</string>
-    <string name="height">Taille</string>
+    <string name="height">Taille (facultatif)</string>
     <string-array name="section_names">
         <item>Profil</item>
         <item>Documentation</item>

@@ -1,86 +1,119 @@
 package com.uqac.pmm.fragment
-
-import android.app.DatePickerDialog
-import androidx.fragment.app.Fragment
+import android.R
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
-import com.uqac.pmm.FragmentDetailEntrainementActivity
-import com.uqac.pmm.R
-import kotlinx.android.synthetic.main.activity_list_serie.*
-import kotlinx.android.synthetic.main.fragment_calendar.*
+import android.widget.Toast
+import android.widget.Toolbar
+import androidx.appcompat.app.ActionBar
+import androidx.fragment.app.Fragment
+import com.github.sundeepk.compactcalendarview.CompactCalendarView
+import com.github.sundeepk.compactcalendarview.CompactCalendarView.CompactCalendarViewListener
+import com.github.sundeepk.compactcalendarview.domain.Event
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_profil_information.*
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.properties.Delegates
-import android.content.Intent
-import android.widget.CalendarView.OnDateChangeListener
 
 
 class FragmentCalendar : Fragment() {
-  var selectedDate by Delegates.notNull<Long>()
-    val c = Calendar.getInstance()
-    val year = c.get(Calendar.YEAR)
-    val month = c.get(Calendar.MONTH)
-    val day = c.get(Calendar.DAY_OF_MONTH)
-    var selectedDay : Int = day
-    var selectedMonth : Int = month
-    var selectedYear : Int = year
+    private var toolbar: Toolbar? = null
+    private val dateFormatForMonth = SimpleDateFormat("MMMM- yyyy", Locale.getDefault())
+
     lateinit var inflater : LayoutInflater
     lateinit var v : View
     lateinit var calendarView : CalendarView
+    val map = linkedMapOf<String, ArrayList<String>>()
+    var compactCalendar: CompactCalendarView? = null
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-        this.inflater = requireActivity().layoutInflater
-        v = inflater.inflate(R.layout.fragment_calendar,null)
-        calendarView = v.findViewById(R.id.calendarView) as CalendarView
-
-        Log.d("TEST",calendarView.date.toString())
-            return inflater.inflate(R.layout.fragment_calendar, container, false)
-        }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflate the layout for this fragment
+        v = inflater.inflate(com.uqac.pmm.R.layout.fragment_calendar,null)
+        readTrainings()
 
-        Log.d("TEST",calendarView.date.toString())
+        return v
+    }
 
-        calendarView.setOnDateChangeListener( CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
+    fun gotoToday() {
 
-            onSelectedDayChange(view, year, month,
-                dayOfMonth) {
+        // Set any date to navigate to particular date
+        compactCalendar?.setCurrentDate(Calendar.getInstance(Locale.getDefault()).time)
 
-                selectedYear = year;
-                selectedMonth = month;
-                selectedDay = dayOfMonth;
-                Log.d("TEST", year.toString())
+    }
+    fun readTrainings() {
 
+        val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
+        val uid = user?.uid
+
+
+        db.collection("users").document("$uid").collection("trainings")
+            .get()
+            .addOnSuccessListener { documents ->
+                documents.map {
+                    //Log.d("NEWMAP", it.get("date").toString())
+                    if (it.get("date") != null)
+                    {
+                        val timestamp = it.get("date") as com.google.firebase.Timestamp
+                        val name=it.get("title")
+                        val exerciseField = ArrayList<String>()
+                        exerciseField.add(0, timestamp.seconds.toString())
+                        exerciseField.add(1, name.toString())
+                        map[it.id] = exerciseField
+                    }
+
+                    //map[it.id] = timestamp.seconds.toString()
+                }
+                compactCalendar = v.findViewById(com.uqac.pmm.R.id.compactcalendar_view) as CompactCalendarView
+                compactCalendar?.setUseThreeLetterAbbreviation(true)
+
+                //val ev1 = Event(Color.argb(255,255, 152, 0), 1639353600000, "Teacher's Professional Day")
+                //compactCalendar?.addEvent(ev1)
+
+                for (v in map)
+                {
+                    val time = v.value[0] + "000"
+                    Log.d("TIME", time)
+
+                    val ev1 = Event(Color.argb(255,255, 152, 0), time.toLong(), v.value[1])
+                    compactCalendar?.addEvent(ev1)
+                }
+                //actionBar.setTitle(dateFormatForMonth.format(compactCalendar!!.firstDayOfCurrentMonth))
+                compactCalendar?.setListener(object : CompactCalendarViewListener {
+                    override fun onDayClick(dateClicked: Date) {
+                        //val context: Context = getActivity().getApplicationContext()
+                        Log.d("TAG DATE",dateClicked.toString())
+                        if (dateClicked.toString().compareTo("Mon Dec 13 00:00:00 GMT 2021") == 0) {
+                            Toast.makeText(context, "Teacher's Professional Day", Toast.LENGTH_SHORT).show()
+                        }
+                        val events = compactCalendar?.getEvents(dateClicked)
+                        Log.d("TAG", "Day was clicked: $dateClicked with events $events")
+                    }
+
+                    override fun onMonthScroll(firstDayOfNewMonth: Date) {
+                        // Changes toolbar title on monthChange
+                        //actionBar.setTitle(dateFormatForMonth.format(firstDayOfNewMonth))
+                    }
+                })
+                gotoToday()
+                Log.d("NEWMAP", map.toString())
             }
-        })
-
-
-
 
     }
-
-    private fun onSelectedDayChange(
-        calendarView: CalendarView,
-        year: Int,
-        month: Int,
-        day: Int,
-        function: () -> Unit
-    ) {
-        Log.d("TEST", year.toString())
-
-    }
-
-
 }

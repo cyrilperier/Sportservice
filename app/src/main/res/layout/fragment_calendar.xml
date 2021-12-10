@@ -5,13 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        android:id="@+id/compactcalendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:compactCalendarBackgroundColor="@color/transparent"
+        app:compactCalendarCurrentDayBackgroundColor="@color/transparent"
+
+        app:compactCalendarCurrentDayTextColor="@color/colorPrimary"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorPrimaryAttenuated"
+        app:compactCalendarMultiEventIndicatorColor="#fff"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarTextSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

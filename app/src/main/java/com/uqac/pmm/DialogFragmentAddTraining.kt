@@ -65,8 +65,8 @@ class DialogFragmentAddTraining() : DialogFragment() {
                     DialogInterface.OnClickListener { dialog, id ->
 
                         Log.d("Training name and date", "${text.text} on date : $selectedDay / $selectedMonth / $selectedYear")
-                        var timestamp_date = Timestamp(selectedYear,selectedMonth,selectedDay,0,0,0,0)
-
+                        var timestamp_date = Timestamp(selectedYear-1900,selectedMonth,selectedDay,0,0,0,0)
+                        Log.d("Timestamp date", timestamp_date.toString())
                         addTrainingToUser(text.text.toString(),timestamp_date,selectedItems)
                     })
                     /*
@@ -82,15 +82,12 @@ class DialogFragmentAddTraining() : DialogFragment() {
         val user = Firebase.auth.currentUser
         val uid = user?.uid
         val db = Firebase.firestore
+        Log.d("DATE AVANT PUSH",date.toString())
         val training = hashMapOf(
             "title" to text,
             "date" to date
         )
         val newExercises = ArrayList<Int>()
-        for (v in selectedItems){
-            Log.d("SELCTION",v.toString())
-        }
-        Log.d("JSUIS ICIIIIIIII",selectedItems.toString())
         db.collection("users").document("$uid").collection("trainings")
             .add(training)
             .addOnSuccessListener { documentReference ->
@@ -153,7 +150,14 @@ class DialogFragmentAddTraining() : DialogFragment() {
         docRef.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    map[document.id] = document.getString("name").toString()
+                    db.collection("exercises").document(document.id).collection("exercises")
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                map[document.id] = document.getString("name").toString()
+                            }
+                        }
+                    //map[document.id] = document.getString("name").toString()
                 }
             }
             .addOnFailureListener { exception ->
