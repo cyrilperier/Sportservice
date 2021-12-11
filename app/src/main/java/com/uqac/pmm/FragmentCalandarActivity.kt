@@ -56,7 +56,7 @@ class FragmentCalandarActivity : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_first, container, false)
+        val v = inflater.inflate(R.layout.fragment_activity_calendar, container, false)
         return v
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

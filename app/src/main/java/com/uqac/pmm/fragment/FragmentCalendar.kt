@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.Toast
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBar
+//import android.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -22,16 +22,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.FragmentCalandarActivity
-import kotlinx.android.synthetic.main.fragment_child.*
 import kotlinx.android.synthetic.main.fragment_profil_information.*
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.fragment_calendar.view.*
 
 
 class FragmentCalendar : Fragment() {
-    private var toolbar: Toolbar? = null
+    private lateinit var toolbar: Toolbar
     private val dateFormatForMonth = SimpleDateFormat("MMMM- yyyy", Locale.getDefault())
 
     lateinit var inflater : LayoutInflater
@@ -72,7 +72,6 @@ class FragmentCalendar : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 documents.map {
-                    //Log.d("NEWMAP", it.get("date").toString())
                     if (it.get("date") != null)
                     {
                         val timestamp = it.get("date") as com.google.firebase.Timestamp
@@ -82,25 +81,22 @@ class FragmentCalendar : Fragment() {
                         exerciseField.add(1, name.toString())
                         map[it.id] = exerciseField
                     }
-                    Log.d("NEWMAP", map.toString())
-
-                    //map[it.id] = timestamp.seconds.toString()
                 }
                 compactCalendar = v.findViewById(com.uqac.pmm.R.id.compactcalendar_view) as CompactCalendarView
                 compactCalendar?.setUseThreeLetterAbbreviation(true)
+                toolbar = v.toolbar as Toolbar
+                toolbar.title = dateFormatForMonth.format(compactCalendar?.getFirstDayOfCurrentMonth())
 
-                //val ev1 = Event(Color.argb(255,255, 152, 0), 1639353600000, "Teacher's Professional Day")
-                //compactCalendar?.addEvent(ev1)
 
-                for (v in map)
-                {
+                for (v in map) {
                     val time = v.value[0] + "000"
                     Log.d("TIME", time)
-
-                    val ev1 = Event(Color.argb(255,255, 152, 0), time.toLong(), v.value[1])
+                    val data = ArrayList<String>()
+                    data.add(0, v.key)
+                    data.add(0, v.value[1])
+                    val ev1 = Event(Color.argb(255, 255, 152, 0), time.toLong(), data)
                     compactCalendar?.addEvent(ev1)
                 }
-                //actionBar.setTitle(dateFormatForMonth.format(compactCalendar!!.firstDayOfCurrentMonth))
                 compactCalendar?.setListener(object : CompactCalendarViewListener {
                     override fun onDayClick(dateClicked: Date) {
                         //val context: Context = getActivity().getApplicationContext()
@@ -115,7 +111,7 @@ class FragmentCalendar : Fragment() {
 
                     override fun onMonthScroll(firstDayOfNewMonth: Date) {
                         // Changes toolbar title on monthChange
-                        //actionBar.setTitle(dateFormatForMonth.format(firstDayOfNewMonth))
+                        toolbar.title = dateFormatForMonth.format(firstDayOfNewMonth);
                     }
                 })
                 gotoToday()
