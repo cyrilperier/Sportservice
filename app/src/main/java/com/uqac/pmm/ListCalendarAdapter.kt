@@ -41,8 +41,7 @@ class ListCalendarAdapter(val events : ArrayList<Event>, val context : Context) 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         val event: Event = events[position]
         var data = event.data as java.util.ArrayList<String>
-        holder.listCalendarView.event_name_textview.text =
-            "${data[0]} "
+        holder.listCalendarView.event_name_textview.text = "${data[0]}"
         holder.listCalendarView.trainChange.setOnClickListener {
             with(it.context){
                 val intent = Intent(this, DetailEntrainementActivity::class.java)

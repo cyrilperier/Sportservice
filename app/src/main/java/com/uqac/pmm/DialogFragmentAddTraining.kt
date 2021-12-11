@@ -1,11 +1,9 @@
 package com.uqac.pmm
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,11 +13,11 @@ import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DialogFragmentAddTraining() : DialogFragment() {
@@ -83,9 +81,11 @@ class DialogFragmentAddTraining() : DialogFragment() {
         val uid = user?.uid
         val db = Firebase.firestore
         Log.d("DATE AVANT PUSH",date.toString())
+        val dates = ArrayList<Timestamp>()
+        dates.add(date)
         val training = hashMapOf(
             "title" to text,
-            "date" to date
+            "dates" to dates
         )
         val newExercises = ArrayList<Int>()
         db.collection("users").document("$uid").collection("trainings")
@@ -96,13 +96,13 @@ class DialogFragmentAddTraining() : DialogFragment() {
                     Log.d("SELCTION",i.toString())
                     val key_id = map.keys.toTypedArray()[i]
                     val value_name = map.get(key_id)
-                    val exercice = hashMapOf(
+                    val exercise = hashMapOf(
                         "name" to value_name
                     )
                     db.collection("users").document("$uid")
                         .collection("trainings").document(documentReference.id)
                         .collection("exercices").document("$key_id")
-                        .set(exercice)
+                        .set(exercise)
                 }
             }
             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }

@@ -1,39 +1,25 @@
 package com.uqac.pmm
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_calendar.*
-import java.time.YearMonth
-import java.time.format.TextStyle
 import java.util.*
-import kotlin.collections.LinkedHashMap
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 
-import kotlinx.android.synthetic.main.fragment_activity_calendar.*
 import java.text.SimpleDateFormat
-import com.github.sundeepk.compactcalendarview.domain.Event
 import com.uqac.pmm.fragment.FragmentCalendar
 import com.uqac.pmm.fragment.FragmentCalendarDescription
 
 
-class FragmentCalandarActivity : Fragment() {
+class FragmentCalendarActivity : Fragment() {
     var compactCalendar: CompactCalendarView? = null
     private val dateFormatMonth: SimpleDateFormat = SimpleDateFormat("MMMM- yyyy", Locale.getDefault())
     private var pompes: Button? = null
@@ -46,7 +32,7 @@ class FragmentCalandarActivity : Fragment() {
         const val ARG_POSITION = "position"
 
         fun getInstance(position: Int): Fragment {
-            val doppelgangerFragment = FragmentCalandarActivity()
+            val doppelgangerFragment = FragmentCalendarActivity()
             val bundle = Bundle()
             bundle.putInt(ARG_POSITION, position)
             doppelgangerFragment.arguments = bundle
@@ -58,6 +44,10 @@ class FragmentCalandarActivity : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_activity_calendar, container, false)
         return v
+    }
+    override fun onStart(){
+        super.onStart()
+        childFragmentManager.beginTransaction().replace(R.id.fragmentCalendar,FragmentCalendar()).commit()
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,7 +64,5 @@ class FragmentCalandarActivity : Fragment() {
             //Toast.makeText(requireContext(), "$key: $stringResult", Toast.LENGTH_SHORT).show()
             childFragmentManager.setFragmentResult("key_child2", bundleOf("child2" to result))
         }
-
     }
-
 }

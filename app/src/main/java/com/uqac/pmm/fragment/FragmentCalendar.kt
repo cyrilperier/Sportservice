@@ -1,6 +1,4 @@
 package com.uqac.pmm.fragment
-import android.R
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -21,12 +19,9 @@ import com.github.sundeepk.compactcalendarview.domain.Event
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.uqac.pmm.FragmentCalandarActivity
-import kotlinx.android.synthetic.main.fragment_profil_information.*
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.appcompat.app.AppCompatActivity
+import com.uqac.pmm.model.ExerciseField
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
 
 
@@ -37,7 +32,7 @@ class FragmentCalendar : Fragment() {
     lateinit var inflater : LayoutInflater
     lateinit var v : View
     lateinit var calendarView : CalendarView
-    val map = linkedMapOf<String, ArrayList<String>>()
+    val map = linkedMapOf<String, ExerciseField>()
     var compactCalendar: CompactCalendarView? = null
 
 
@@ -72,13 +67,18 @@ class FragmentCalendar : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 documents.map {
-                    if (it.get("date") != null)
+                    if (it.get("dates") != null)
                     {
-                        val timestamp = it.get("date") as com.google.firebase.Timestamp
+                        Log.d("Possibles", it.get("title").toString())
+                        val dates = it.get("dates") as ArrayList<*>
+                        val exericseTimestampArray = ArrayList<String>()
+                        for (d in dates)
+                        {
+                            val timestamp = d as com.google.firebase.Timestamp
+                            exericseTimestampArray.add(timestamp.seconds.toString())
+                        }
                         val name=it.get("title")
-                        val exerciseField = ArrayList<String>()
-                        exerciseField.add(0, timestamp.seconds.toString())
-                        exerciseField.add(1, name.toString())
+                        val exerciseField = ExerciseField(exericseTimestampArray,name.toString())
                         map[it.id] = exerciseField
                     }
                 }
@@ -89,13 +89,17 @@ class FragmentCalendar : Fragment() {
 
 
                 for (v in map) {
-                    val time = v.value[0] + "000"
-                    Log.d("TIME", time)
-                    val data = ArrayList<String>()
-                    data.add(0, v.key)
-                    data.add(0, v.value[1])
-                    val ev1 = Event(Color.argb(255, 255, 152, 0), time.toLong(), data)
-                    compactCalendar?.addEvent(ev1)
+                    for (ts in v.value.timestampArray)
+                    {
+                        val time = ts + "000"
+                        Log.d("TIME", time)
+                        val data = ArrayList<String>()
+                        data.add(0, v.key)
+                        data.add(0, v.value.name)
+                        val ev1 = Event(Color.argb(255, 255, 152, 0), time.toLong(), data)
+                        compactCalendar?.addEvent(ev1)
+                    }
+
                 }
                 compactCalendar?.setListener(object : CompactCalendarViewListener {
                     override fun onDayClick(dateClicked: Date) {
