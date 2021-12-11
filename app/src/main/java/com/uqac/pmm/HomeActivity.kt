@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
         fun Layout_Change_Selection(view: View){
-            setContentView(R.layout.activity_documentation);
+            setContentView(R.layout.fragment_chronometre);
         }
 
         fun Layout_Change_Workout(view: View){
