@@ -9,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +25,12 @@ import java.time.format.TextStyle
 import java.util.*
 import kotlin.collections.LinkedHashMap
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
+
+import kotlinx.android.synthetic.main.fragment_activity_calendar.*
 import java.text.SimpleDateFormat
+import com.github.sundeepk.compactcalendarview.domain.Event
+import com.uqac.pmm.fragment.FragmentCalendar
+import com.uqac.pmm.fragment.FragmentCalendarDescription
 
 
 class FragmentCalandarActivity : Fragment() {
@@ -48,31 +56,25 @@ class FragmentCalandarActivity : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        val v = inflater.inflate(R.layout.fragment_activity_calendar, container, false)
-
+        val v = inflater.inflate(R.layout.fragment_first, container, false)
         return v
     }
-
-/*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        class DayViewContainer(view: View) : ViewContainer(view) {
-            val textView = view.findViewById<TextView>(R.id.calendarDayText)
+        //add child fragment
+        childFragmentManager.beginTransaction().replace(R.id.fragmentCalendar,FragmentCalendar()).commit()
+        childFragmentManager.beginTransaction().add(R.id.fragmentCalendarDescription,FragmentCalendarDescription()).commit()
 
-            // With ViewBinding
-            // val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
+        //listen result from the ChildFragment through childFragmentManager
+        childFragmentManager.setFragmentResultListener("key_parent", this) {key, result->
+            // get the result from bundle
+            val result = result.get("parent")
+            Log.d("RESULTAT", result.toString())
+            //Toast.makeText(requireContext(), "$key: $stringResult", Toast.LENGTH_SHORT).show()
+            childFragmentManager.setFragmentResult("key_child2", bundleOf("child2" to result))
         }
-        calendarView.dayBinder = object : DayBinder<DayViewContainer> {
-            // Called only when a new container is needed.
-            override fun create(view: View) = DayViewContainer(view)
 
-            // Called every time we need to reuse a container.
-            override fun bind(container: DayViewContainer, day: CalendarDay) {
-                container.textView.text = day.date.dayOfMonth.toString()
-            }
-        }
-    }*/
+    }
 
 }

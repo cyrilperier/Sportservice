@@ -12,17 +12,22 @@ import android.widget.CalendarView
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 import com.github.sundeepk.compactcalendarview.CompactCalendarView.CompactCalendarViewListener
 import com.github.sundeepk.compactcalendarview.domain.Event
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.uqac.pmm.FragmentCalandarActivity
+import kotlinx.android.synthetic.main.fragment_child.*
 import kotlinx.android.synthetic.main.fragment_profil_information.*
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 
 class FragmentCalendar : Fragment() {
@@ -35,10 +40,10 @@ class FragmentCalendar : Fragment() {
     val map = linkedMapOf<String, ArrayList<String>>()
     var compactCalendar: CompactCalendarView? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +82,7 @@ class FragmentCalendar : Fragment() {
                         exerciseField.add(1, name.toString())
                         map[it.id] = exerciseField
                     }
+                    Log.d("NEWMAP", map.toString())
 
                     //map[it.id] = timestamp.seconds.toString()
                 }
@@ -104,6 +110,7 @@ class FragmentCalendar : Fragment() {
                         }
                         val events = compactCalendar?.getEvents(dateClicked)
                         Log.d("TAG", "Day was clicked: $dateClicked with events $events")
+                        setFragmentResult("key_parent", bundleOf("parent" to events))
                     }
 
                     override fun onMonthScroll(firstDayOfNewMonth: Date) {
@@ -112,7 +119,7 @@ class FragmentCalendar : Fragment() {
                     }
                 })
                 gotoToday()
-                Log.d("NEWMAP", map.toString())
+
             }
 
     }

@@ -5,23 +5,19 @@
     android:orientation="vertical">
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentCalendar"
-        android:name="com.uqac.pmm.fragment.FragmentCalendar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
-        android:layout_weight="1" />
-
-    <fragment
-        android:id="@+id/fragmentCalendarDescription"
-        android:name="com.uqac.pmm.fragment.FragmentCalendarDescription"
-
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1" />
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentCalendarDescription"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_weight="1"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
