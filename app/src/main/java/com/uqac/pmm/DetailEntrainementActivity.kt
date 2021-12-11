@@ -8,13 +8,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.uqac.pmm.data.ExerciceDao
-import com.uqac.pmm.data.ExerciceDataBase
+
 import com.uqac.pmm.model.Exercice
-import com.uqac.pmm.model.Type
+
 import com.uqac.pmm.ui.main.SectionsPagerDetailEntrainementAdaptater
 import kotlinx.android.synthetic.main.activity_detail_entrainement.*
-import kotlinx.coroutines.runBlocking
+
 
 class DetailEntrainementActivity : AppCompatActivity() {
     lateinit var exercices: List<Exercice>
@@ -24,8 +23,6 @@ class DetailEntrainementActivity : AppCompatActivity() {
     val list = mutableListOf<String>()
     lateinit var idFirebase: String
     var refrech=false
-    lateinit var database: ExerciceDataBase
-    lateinit var exerciceDao: ExerciceDao
     private var detailEntrainementPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
     }

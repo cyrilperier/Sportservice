@@ -7,16 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.uqac.pmm.data.SerieDao
-import com.uqac.pmm.data.SerieDataBase
 import com.uqac.pmm.model.Serie
-import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.activity_list_serie.*
-import kotlin.concurrent.fixedRateTimer
+
 
 
 class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebaseExercice:List<String>)  : Fragment() {
@@ -25,8 +21,6 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
 
 
     lateinit var series: List<Serie>
-    lateinit var database: SerieDataBase
-    lateinit var serieDao: SerieDao
     var idFirebaseEntrainement=idFirebaseEntrainement
     var idFirebaseExercice=idFirebaseExercice
     lateinit var nbSerie:String
@@ -66,17 +60,12 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
 
         idExercice=idFirebaseExercice[position]
 
-        Dao()
         read_entrainement()
 Log.d("TEST",position.toString())
 
         addExercice.setOnClickListener {
             confirmFireMissiles()
         }
-
-
-
-
 
     }
     fun read_entrainement() {
@@ -137,15 +126,6 @@ Log.d("TEST",position.toString())
         }
     }
 
-    private fun Dao(){
-        //accés a la base
-        database = context?.let {
-            Room.databaseBuilder(
-                it, SerieDataBase::class.java, "serie-db"
 
-            ).build()
-        }!!
-        serieDao = database.getSerieDao()
-    }
 
     }
