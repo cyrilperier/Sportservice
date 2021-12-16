@@ -35,6 +35,7 @@
                 android:background="@drawable/roundcorner"
                 android:drawableLeft="@drawable/pushup"
                 android:fontFamily="sans-serif"
+                android:paddingLeft="15dp"
                 android:text="Exercices sans Machine"
                 android:textColor="#050303"
                 android:textSize="24sp" />
@@ -47,6 +48,7 @@
                 android:background="@drawable/roundcorner"
                 android:drawableLeft="@drawable/machine"
                 android:onClick="Layout_Change_Machine"
+                android:paddingLeft="20dp"
                 android:text="Machines"
                 android:textColor="#050303"
                 android:textSize="24sp" />
@@ -58,6 +60,7 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/roundcorner"
                 android:drawableLeft="@drawable/warmup"
+                android:paddingLeft="20dp"
                 android:text="Echauffement"
                 android:textColor="#050303"
                 android:textSize="24sp" />
@@ -70,6 +73,7 @@
                 android:background="@drawable/roundcorner"
                 android:drawableLeft="@drawable/workout"
                 android:onClick="Layout_Change_Workout"
+                android:paddingLeft="20dp"
                 android:text="Entrainement"
                 android:textColor="#050303"
                 android:textSize="24sp" />
@@ -81,6 +85,7 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/roundcorner"
                 android:drawableLeft="@drawable/etirement"
+                android:paddingLeft="20dp"
                 android:text="Etirements"
                 android:textColor="#050303"
                 android:textSize="24sp" />

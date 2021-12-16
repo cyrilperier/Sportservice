@@ -12,8 +12,12 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabTextColor="@android:color/black" />
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabTextColor="@color/tabLayoutText"
+        app:tabBackground="@color/tabLayoutBackground"
+        app:tabPaddingStart="-1dp"
+        app:tabPaddingEnd="-1dp"/>
 
 
     <androidx.viewpager2.widget.ViewPager2

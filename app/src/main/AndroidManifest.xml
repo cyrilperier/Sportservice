@@ -17,6 +17,7 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.SportService.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

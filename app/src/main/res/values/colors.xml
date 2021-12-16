@@ -15,4 +15,7 @@
     <color name="transparent">#00010000</color>
     <color name="red">#f44336</color>
     <color name="greyBackgroundEnd">#444444</color>
+    <color name="colorCalendar">#FF000000</color>
+    <color name="tabLayoutText">#FF000000</color>
+    <color name="tabLayoutBackground">#FFFFFFFF</color>
 </resources>

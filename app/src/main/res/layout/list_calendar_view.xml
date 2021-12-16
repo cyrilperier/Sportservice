@@ -9,24 +9,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/training"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="8dp"
-
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Entrainement" />
 
         <TextView
             android:id="@+id/event_name_textview"
@@ -35,44 +20,30 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="8dp"
 
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="15dp"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/training"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Nom" />
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="8dp"
-
-            android:layout_marginTop="30dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/event_name_textview"
-            tools:text="Date" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/trainChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="38dp"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:src="@android:drawable/ic_menu_edit"
             android:text="Edit Training"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/playTraining"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playTraining"
-            android:layout_width="wrap_content"
+            android:layout_width="43dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:background="@android:drawable/ic_media_play"
             android:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
