@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -62,6 +63,12 @@ class DialogFragmentAddSerie(idFirebaseEntrainement:String,idExercice:String,nbS
             .add(serie)
             .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+        with(context) {
+            val intent = Intent(this, DetailEntrainementActivity::class.java)
+            intent.putExtra("idFirebase", idFirebaseEntrainement)
+            intent.putExtra("commencer", true)
+            startActivity(intent)
+        }
 
     }
 }

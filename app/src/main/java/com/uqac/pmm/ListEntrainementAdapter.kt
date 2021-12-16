@@ -1,9 +1,12 @@
 package com.uqac.pmm
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -14,12 +17,13 @@ import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.list_entrainement_view.view.*
 
 
-class ListEntrainementAdapter (val entrainements : List<Entrainement>, val context : Context) : RecyclerView.Adapter<com.uqac.pmm.ListEntrainementAdapter.EntrainementViewHolder>() {
+class ListEntrainementAdapter (val entrainements : List<Entrainement>, val context : Context,val commencer:Boolean,val history:Boolean) : RecyclerView.Adapter<com.uqac.pmm.ListEntrainementAdapter.EntrainementViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+
     class EntrainementViewHolder(val entrainementView: View) : RecyclerView.ViewHolder(entrainementView)
 
 
@@ -32,10 +36,16 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+
     override fun onBindViewHolder(holder: EntrainementViewHolder, position: Int)  {
         val entrainement: Entrainement = entrainements[position]
+        val commencer :Boolean = commencer
+
         holder.entrainementView.entrainement_name_textview.text=
             "${entrainement.name} "
+        if(history==true){
+        holder.entrainementView.delete_training_imageView.setVisibility(INVISIBLE)}
+        else{holder.entrainementView.delete_training_imageView.setVisibility(VISIBLE)}
 
 
         holder.entrainementView.setOnClickListener{
@@ -44,6 +54,7 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
                 val intent = Intent(this, DetailEntrainementActivity::class.java)
                 intent.putExtra("entrainement_name",entrainement.name )
                 intent.putExtra("idFirebase",entrainement.idFirebase)
+                intent.putExtra("commencer",commencer)
                 startActivity(intent)
 
             }

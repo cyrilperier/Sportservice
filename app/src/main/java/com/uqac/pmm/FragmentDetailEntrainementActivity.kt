@@ -1,21 +1,26 @@
 package com.uqac.pmm
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.uqac.pmm.model.Entrainement
 import com.uqac.pmm.model.Serie
+import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.activity_list_serie.*
+import kotlin.properties.Delegates
 
 
-
-class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebaseExercice:List<String>)  : Fragment() {
+class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebaseExercice:List<String>,commencer:Boolean)  : Fragment() {
 
 
 
@@ -23,9 +28,11 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
     lateinit var series: List<Serie>
     var idFirebaseEntrainement=idFirebaseEntrainement
     var idFirebaseExercice=idFirebaseExercice
+    var commencer=commencer
     lateinit var nbSerie:String
     lateinit var idExercice : String
-
+    private var terminer_exercice_button: Button? = null
+    var nb =0
 
     companion object {
         const val ARG_POSITION = "position"
@@ -33,9 +40,10 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
         fun getInstance(
             position: Int,
             idFirebaseEntrainement: String,
-            idFirebaseExercice: List<String>
+            idFirebaseExercice: List<String>,
+            commencer: Boolean
         ): Fragment {
-            val detailEntrainementFragment = FragmentDetailEntrainementActivity(idFirebaseEntrainement,idFirebaseExercice)
+            val detailEntrainementFragment = FragmentDetailEntrainementActivity(idFirebaseEntrainement,idFirebaseExercice,commencer)
             val bundle = Bundle()
             bundle.putInt(ARG_POSITION, position)
             detailEntrainementFragment.arguments = bundle
@@ -50,7 +58,14 @@ class FragmentDetailEntrainementActivity(idFirebaseEntrainement:String,idFirebas
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_list_serie, container, true)
+        var v=inflater.inflate(R.layout.activity_list_serie, container, true)
+        terminer_exercice_button=v?.findViewById(R.id.finir_exercice_button)
+        if(commencer==false) {
+            terminer_exercice_button?.setVisibility(View.INVISIBLE)
+        }
+
+        else{terminer_exercice_button?.setVisibility(View.VISIBLE)}
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,6 +80,9 @@ Log.d("TEST",position.toString())
 
         addExercice.setOnClickListener {
             confirmFireMissiles()
+        }
+        finir_exercice_button.setOnClickListener {
+            finirExercice(position+1)
         }
 
     }
@@ -96,7 +114,7 @@ Log.d("TEST",position.toString())
 
                 Log.d("TEST", "serie " + series)
 
-               // list_series_recyclerview.adapter = ListSerieAdapter(series, getActivity())
+
 
                 list_series_recyclerview.apply {
                     // set a LinearLayoutManager to handle Android
@@ -126,6 +144,56 @@ Log.d("TEST",position.toString())
         }
     }
 
+    fun finirExercice(idExercice:Int){
+        nb=idExercice
+        Log.d("TEST", "nb:"+nb.toString())
+        Log.d("TEST","limite:"+idFirebaseExercice.size.toString())
+        if(nb==idFirebaseExercice.size) {
+            with(context) {
 
+                get_entrainement()
+
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+        finir_exercice_button.setEnabled(false)
+
+    }
+
+    fun get_entrainement() {
+
+        val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
+        val uid = user?.uid
+
+
+       db.collection("users").document("$uid")
+            .collection("trainings")
+           .document("$idFirebaseEntrainement")
+            .get()
+            .addOnSuccessListener { results ->
+
+                var idTraining=results.id
+                var nameTraining=results.get("title")
+
+                val entrainement = hashMapOf(
+                    "title" to nameTraining
+                )
+
+                db.collection("users").document("$uid")
+                    .collection("history")
+                    .document("4jCppJ7gHeqSbDg69kA7")
+                    .collection("trainings")
+                    .document("$idTraining")
+                    .set(entrainement)
+
+            }
+
+
+
+
+    }
 
     }
