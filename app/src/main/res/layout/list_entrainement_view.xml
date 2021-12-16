@@ -14,34 +14,85 @@
         android:layout_height="match_parent"
         android:background="@drawable/roundcorner"
         >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/taskTitleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/entrainement_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:background="@drawable/roundcorner"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dropdownButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="nom" />
 
-        <TextView
-            android:id="@+id/entrainement_name_textview"
+            <ImageButton
+                android:id="@+id/dropdownButton"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="#00000000"
+                app:layout_constraintBottom_toBottomOf="@+id/entrainement_name_textview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/entrainement_name_textview"
+                app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- The task description is only visible when the card is expanded. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_dates_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start|center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskTitleLayout"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/addDate"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:gravity="start|center_vertical"
+            android:src="@android:drawable/ic_menu_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/list_dates_recyclerview"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="ImageContrastCheck" />
+
+        <Button
+            android:id="@+id/delete_training_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="8dp"
-            android:background="@drawable/roundcorner"
+            android:layout_marginEnd="20dp"
+            android:background="@color/red"
+            android:gravity="start|center_vertical"
+            android:text="Remove training"
+            android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.812"
-            tools:text="nom" />
-
-        <ImageView
-            android:id="@+id/delete_training_imageView"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.952"
-            app:layout_constraintStart_toEndOf="@+id/entrainement_name_textview"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.333"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
-
+            app:layout_constraintTop_toBottomOf="@+id/list_dates_recyclerview" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

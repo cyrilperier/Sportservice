@@ -3,6 +3,7 @@ package com.uqac.pmm
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -63,7 +64,12 @@ class ListEntrainementActivity :AppCompatActivity() {
 
 
                 entrainements = results.map {
-                    Entrainement(null, it.id, it.get("title").toString())
+                    var dates : ArrayList<Timestamp>? = null
+                    dates?.clear()
+                    if (it.get("dates") != null)
+                        dates = it.get("dates") as ArrayList<Timestamp>?
+
+                    Entrainement(null, it.id, it.get("title").toString(),dates)
                 }
 
                 list_entrainements_recyclerview.adapter =

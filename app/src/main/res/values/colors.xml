@@ -13,6 +13,6 @@
     <color name="colorAccent">#c75f00</color>
     <color name="greyBackground">#5b5b5b</color>
     <color name="transparent">#00010000</color>
-
+    <color name="red">#f44336</color>
     <color name="greyBackgroundEnd">#444444</color>
 </resources>
