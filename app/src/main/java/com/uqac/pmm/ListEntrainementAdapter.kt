@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,17 +15,20 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.model.Entrainement
+import kotlinx.android.synthetic.main.activity_list_entrainement.view.*
 import kotlinx.android.synthetic.main.list_date_view.view.*
 import kotlinx.android.synthetic.main.list_entrainement_view.view.*
 import java.util.*
+import java.util.zip.Inflater
 
 
-class ListEntrainementAdapter (val entrainements : List<Entrainement>, val context : Context) : RecyclerView.Adapter<com.uqac.pmm.ListEntrainementAdapter.EntrainementViewHolder>() {
+class ListEntrainementAdapter (val entrainements : List<Entrainement>, val context : Context,val commencer:Boolean,val history:Boolean) : RecyclerView.Adapter<com.uqac.pmm.ListEntrainementAdapter.EntrainementViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
+
     class EntrainementViewHolder(val entrainementView: View) : RecyclerView.ViewHolder(entrainementView)
 
     private var isExpanded = false
@@ -32,6 +36,7 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntrainementViewHolder {
         val layoutInflater : LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.list_entrainement_view, parent, false)
+
 
         return EntrainementViewHolder(view)
     }
@@ -42,8 +47,21 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
         collapse(holder)
         holder.entrainementView.entrainement_name_textview.text=
             "${entrainement.name} "
+
+        hideButton(holder)
+
+
         holder.entrainementView.dropdownButton.setOnClickListener {
-                    if (isExpanded) collapse(holder) else expand(holder,entrainement)
+
+                    if (isExpanded) {
+                        collapse(holder)
+                        hideButton(holder)
+
+                    }else {
+
+                        expand(holder,entrainement)
+                        hideButton(holder)
+                    }
                 }
         holder.entrainementView.setOnClickListener {
 
@@ -51,6 +69,7 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
                 val intent = Intent(this, DetailEntrainementActivity::class.java)
                 intent.putExtra("entrainement_name", entrainement.name)
                 intent.putExtra("idFirebase", entrainement.idFirebase)
+                intent.putExtra("commencer",commencer)
                 startActivity(intent)
 
             }
@@ -126,4 +145,11 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
         AnimationUtils.collapse(holder.entrainementView.delete_training_imageView)
         isExpanded = false
     }
+
+    private fun hideButton(holder: EntrainementViewHolder){if(history) {
+        holder.entrainementView.delete_training_imageView.setVisibility(GONE)
+        holder.entrainementView.addDate.setVisibility(GONE)
+
+    }
+    else{holder.entrainementView.delete_training_imageView.setVisibility(VISIBLE)}}
 }

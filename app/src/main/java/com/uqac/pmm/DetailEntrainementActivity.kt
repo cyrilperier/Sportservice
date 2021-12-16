@@ -13,6 +13,7 @@ import com.uqac.pmm.model.Exercice
 
 import com.uqac.pmm.ui.main.SectionsPagerDetailEntrainementAdaptater
 import kotlinx.android.synthetic.main.activity_detail_entrainement.*
+import kotlin.properties.Delegates
 
 
 class DetailEntrainementActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class DetailEntrainementActivity : AppCompatActivity() {
     var arrayid = mutableListOf<String>()
     val list = mutableListOf<String>()
     lateinit var idFirebase: String
+    var commencer by Delegates.notNull<Boolean>()
     var refrech=false
     private var detailEntrainementPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
@@ -34,8 +36,9 @@ class DetailEntrainementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_entrainement)
         if (intent.hasExtra("idFirebase")) {
-            idFirebase = intent?.getStringExtra("idFirebase")!!}
-        //detailEntrainementNamesArray=resources.getStringArray(com.uqac.pmm.R.array.entrainement_names)
+            idFirebase = intent?.getStringExtra("idFirebase")!!
+            commencer = intent?.getBooleanExtra("commencer",false)!!}
+
 
         read_entrainement()
 
@@ -65,7 +68,7 @@ class DetailEntrainementActivity : AppCompatActivity() {
                     it.id} as MutableList<String>
                 Log.d("DETAIL","array"+array)
                 detailEntrainementNamesArray= array.toTypedArray()
-                val detailEntrainementAdaptater = SectionsPagerDetailEntrainementAdaptater(this, detailEntrainementNamesArray.size,idFirebase,arrayid)
+                val detailEntrainementAdaptater = SectionsPagerDetailEntrainementAdaptater(this, detailEntrainementNamesArray.size,idFirebase,arrayid,commencer)
                 detailEntrainementViewPager.adapter = detailEntrainementAdaptater
 
 

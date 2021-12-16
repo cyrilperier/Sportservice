@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -66,6 +67,12 @@ class DialogFragmentAddTraining() : DialogFragment() {
                         var timestamp_date = Timestamp(selectedYear-1900,selectedMonth,selectedDay,0,0,0,0)
                         Log.d("Timestamp date", timestamp_date.toString())
                         addTrainingToUser(text.text.toString(),timestamp_date,selectedItems)
+                        with(context) {
+                            val intent = Intent(this, com.uqac.pmm.ListEntrainementActivity::class.java)
+                            intent.putExtra("commencer",false)
+                            startActivity(intent)
+                        }
+
                     })
                     /*
                 .setNegativeButton(R.string.cancel,
@@ -103,6 +110,7 @@ class DialogFragmentAddTraining() : DialogFragment() {
                         .collection("trainings").document(documentReference.id)
                         .collection("exercices").document("$key_id")
                         .set(exercise)
+
                 }
             }
             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
@@ -127,7 +135,6 @@ class DialogFragmentAddTraining() : DialogFragment() {
             // Set the action buttons
             .setPositiveButton(R.string.ok,
                 DialogInterface.OnClickListener { dialog, id ->
-                    Log.d("ICIIIII", selectedItems.toString())
 
                 })
             .setNegativeButton(R.string.cancel,
@@ -157,7 +164,6 @@ class DialogFragmentAddTraining() : DialogFragment() {
                                 map[document.id] = document.getString("name").toString()
                             }
                         }
-                    //map[document.id] = document.getString("name").toString()
                 }
             }
             .addOnFailureListener { exception ->

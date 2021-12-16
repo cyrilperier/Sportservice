@@ -113,6 +113,7 @@ class FragmentDocumentationActivity : Fragment() {
 
             with(it.context) {
                 val intent = Intent(this, ListEntrainementActivity::class.java)
+                intent.putExtra("commencer",false)
                 startActivity(intent)
 
             }
