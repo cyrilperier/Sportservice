@@ -117,6 +117,7 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
                     .document(entrainement.idFirebase.toString())
                     .delete()
 
+
                 val intent = Intent(this, ListEntrainementActivity::class.java)
                 startActivity(intent)
 
@@ -124,6 +125,7 @@ class ListEntrainementAdapter (val entrainements : List<Entrainement>, val conte
                     }
 
             }
+
 
         }
 

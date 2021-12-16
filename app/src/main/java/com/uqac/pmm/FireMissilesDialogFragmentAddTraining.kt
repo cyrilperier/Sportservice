@@ -7,23 +7,22 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.io.Serializable
 import kotlin.collections.ArrayList
 
-import kotlin.collections.HashMap
 
-
-class FireMissilesDialogFragmentAddTraining(array: Array<String>, map: LinkedHashMap<String, String>) : DialogFragment(){
+class FireMissilesDialogFragmentAddTraining(
+    array: Array<String>,
+    map: LinkedHashMap<String, String>,
+    id: String,
+    name: String
+) : DialogFragment(){
     var array = array
     var map = map
     var array2 = mutableListOf<String>()
+    var name = name
+    var id = id
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val selectedItems = ArrayList<Int>() // Where we track the selected items
@@ -78,14 +77,17 @@ class FireMissilesDialogFragmentAddTraining(array: Array<String>, map: LinkedHas
         val user = Firebase.auth.currentUser
         val uid = user?.uid
         val db = Firebase.firestore
-        val exercise = "pompe"
+
         for (i in selectedItems){
             val tid = map.keys.toTypedArray()[i]
+            val exercise = hashMapOf(
+                "name" to name
+            )
             db.collection("users").document("$uid")
                 .collection("trainings").document("$tid")
-                .update("exercices", FieldValue.arrayUnion("$exercise"))
+                .collection("exercices").document("$id")
+                .set(exercise)
         }
-
     }
 
 }

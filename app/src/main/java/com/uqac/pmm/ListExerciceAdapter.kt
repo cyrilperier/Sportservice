@@ -51,8 +51,9 @@ class ListExerciceAdapter (val exercices : List<Exercice>, val context : Context
                         })
 
                 val intent = Intent(this, DetailExerciceActivity::class.java)
+                intent.putExtra("exercice_id",exercice.idFirebaseEntrainement )
                 intent.putExtra("exercice_name",exercice.name )
-               intent.putExtra("exercice_type",type)
+                intent.putExtra("exercice_type",exercice.type)
                 intent.putExtra("exercice_image",exercice.url_image)
                 intent.putExtra("exercice_description",exercice.description)
                 intent.putExtra("exercice_zone",exercice.zone)

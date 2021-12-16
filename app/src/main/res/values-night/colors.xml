@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryAttenuated">#80FF9800</color>
+    <color name="colorPrimaryDark">#FF9800</color>
+    <color name="colorCalendar">#FFFFFFFF</color>
+    <color name="tabLayoutText">#FFFFFFFF</color>
+    <color name="tabLayoutBackground">#444444</color>
+</resources>

@@ -13,7 +13,6 @@ import com.google.firebase.auth.ktx.auth
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.uqac.pmm.model.Type
 
 
 class FragmentDocumentationActivity : Fragment() {
@@ -63,13 +62,6 @@ class FragmentDocumentationActivity : Fragment() {
             .addOnFailureListener { exception ->
                 Log.d("TAG", "get failed with ", exception)
             }
-        pompes = v.findViewById(R.id.button_pompes)
-        pompes?.setOnClickListener {
-            openDialog(v, map)
-            Log.d("TAG", "t'es bien ici")
-
-        }
-
 
         openExerciceSansMachine(v)
         openEntrainement(v)
@@ -80,16 +72,6 @@ class FragmentDocumentationActivity : Fragment() {
 
 
         return v
-    }
-
-    private fun openDialog(v: View?, map: LinkedHashMap<String, String>) {
-        val array2 = mutableListOf<String>()
-        for (v in map) {
-            array2.add(v.value)
-        }
-        val array = array2.toTypedArray()
-        val newFragment = FireMissilesDialogFragmentAddTraining(array, map)
-        fragmentManager?.let { newFragment.show(it, "missiles") }
     }
 
     fun openExerciceSansMachine(v: View?) {
