@@ -49,8 +49,20 @@ class ListCalendarAdapter(val events : ArrayList<Event>, val context : Context) 
                 intent.putExtra("idFirebase",data[1])
                 startActivity(intent)
             }
+        holder.listCalendarView.playTraining.setOnClickListener {
+            with(it.context){
+                val intent = Intent(this, ListEntrainementActivity::class.java)
+                intent.putExtra("commencer",true)
+                startActivity(intent)
+
+
+
+
+                }
+            }
         }
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = events.size

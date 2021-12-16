@@ -127,7 +127,6 @@ class DialogFragmentAddTraining() : DialogFragment() {
             // Set the action buttons
             .setPositiveButton(R.string.ok,
                 DialogInterface.OnClickListener { dialog, id ->
-                    Log.d("ICIIIII", selectedItems.toString())
 
                 })
             .setNegativeButton(R.string.cancel,
@@ -157,7 +156,6 @@ class DialogFragmentAddTraining() : DialogFragment() {
                                 map[document.id] = document.getString("name").toString()
                             }
                         }
-                    //map[document.id] = document.getString("name").toString()
                 }
             }
             .addOnFailureListener { exception ->

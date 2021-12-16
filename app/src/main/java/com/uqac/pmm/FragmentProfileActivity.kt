@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.fragment_activity_profile.*
 
 
 class FragmentProfileActivity : Fragment() {
-    private var button2 : Button? = null
+    private var commencer_entrainement_button: Button? = null
+
     companion object {
         const val ARG_POSITION = "position"
 
@@ -27,8 +28,22 @@ class FragmentProfileActivity : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val v =inflater.inflate(R.layout.fragment_activity_profile, container, false)
-
+        openEntrainement(v)
         return v
+    }
+
+    fun openEntrainement(v: View?){
+        commencer_entrainement_button = v?.findViewById(R.id.commencer_entrainement_button)
+        commencer_entrainement_button?.setOnClickListener {
+
+            with(it.context) {
+                val intent = Intent(this, com.uqac.pmm.ListEntrainementActivity::class.java)
+                intent.putExtra("commencer",true)
+                startActivity(intent)
+
+            }
+        }
+
     }
 
 }

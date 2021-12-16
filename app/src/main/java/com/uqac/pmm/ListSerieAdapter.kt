@@ -1,14 +1,18 @@
 package com.uqac.pmm
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.model.Serie
+import kotlinx.android.synthetic.main.activity_list_serie.*
 import kotlinx.android.synthetic.main.list_entrainement_view.view.entrainement_name_textview
 import kotlinx.android.synthetic.main.list_serie_view.view.*
 
@@ -33,6 +37,7 @@ class ListSerieAdapter(val series : List<Serie>, val context : Context) : Recycl
         }
 
         // Replace the contents of a view (invoked by the layout manager)
+
         override fun onBindViewHolder(holder: SerieViewHolder, position: Int)  {
             val serie: Serie= series[position]
             holder.serieView.serie_name_textview.text=
@@ -46,6 +51,8 @@ holder.serieView.serie_valider_button.setOnClickListener {
     var poids = holder.serieView.serie_poids_textview.text.toString().toInt()
     var repetition = holder.serieView.serie_repetition_textview.text.toString().toInt()
     modify_serie(serie.idFirebaseEntrainement,serie.idFirebaseExercice,serie.idFirebaseSerie,poids,repetition)
+    holder.serieView.serie_valider_button.setEnabled(false)
+
 }
 
 
@@ -72,7 +79,6 @@ holder.serieView.serie_valider_button.setOnClickListener {
             .collection("serie")
             .document("$idSerie")
             .update("poids", poids,"repetition",repetition)
-
 
         }
 
