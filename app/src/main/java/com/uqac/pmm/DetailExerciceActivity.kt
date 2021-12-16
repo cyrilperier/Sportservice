@@ -25,7 +25,7 @@ class DetailExerciceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_detail_exercice)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val intent = intent
 

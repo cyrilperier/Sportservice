@@ -23,6 +23,9 @@ class ListEntrainementActivity :AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val v = setContentView(R.layout.activity_list_entrainement)
 
         commencer = intent?.getBooleanExtra("commencer",false)!!

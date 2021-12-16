@@ -40,7 +40,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".DetailEntrainementActivity"
-
+            android:parentActivityName=".ListEntrainementActivity"
             android:label="@string/title_activity_home"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation"
@@ -52,17 +52,20 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ListEntrainementActivity"
+            android:parentActivityName=".HomeActivity"
             android:exported="true"
             tools:ignore="Instantiatable"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ListExerciceActivity"
+            android:parentActivityName=".HomeActivity"
             android:exported="true"
             tools:ignore="Instantiatable"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".DetailExerciceActivity"
+            android:parentActivityName=".ListExerciceActivity"
             android:exported="true"
             tools:ignore="Instantiatable"
             android:screenOrientation="portrait"/>
