@@ -1,6 +1,7 @@
 package com.uqac.pmm
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Timestamp
@@ -9,6 +10,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.activity_list_entrainement.*
+import kotlinx.android.synthetic.main.activity_list_entrainement.view.*
 import kotlinx.android.synthetic.main.list_entrainement_view.*
 import kotlin.properties.Delegates
 
@@ -77,7 +79,6 @@ class ListEntrainementActivity :AppCompatActivity() {
 
                 list_entrainements_recyclerview.adapter =
                     ListEntrainementAdapter(entrainements, this@ListEntrainementActivity,commencer,false)
-
 
             }
 

@@ -49,6 +49,8 @@ class ListCalendarAdapter(val events : ArrayList<Event>, val context : Context) 
                 intent.putExtra("idFirebase",data[1])
                 startActivity(intent)
             }
+
+        }
         holder.listCalendarView.playTraining.setOnClickListener {
             with(it.context){
                 val intent = Intent(this, ListEntrainementActivity::class.java)
@@ -58,7 +60,6 @@ class ListCalendarAdapter(val events : ArrayList<Event>, val context : Context) 
 
 
 
-                }
             }
         }
     }

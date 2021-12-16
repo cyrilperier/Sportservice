@@ -178,6 +178,7 @@ Log.d("TEST",position.toString())
                 var idTraining=results.id
                 var nameTraining=results.get("title")
 
+
                 val entrainement = hashMapOf(
                     "title" to nameTraining
                 )

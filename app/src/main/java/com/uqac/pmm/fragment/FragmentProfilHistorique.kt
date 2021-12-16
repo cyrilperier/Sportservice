@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.sundeepk.compactcalendarview.domain.Event
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -20,6 +21,7 @@ import com.uqac.pmm.model.Entrainement
 import kotlinx.android.synthetic.main.activity_list_entrainement.*
 import kotlinx.android.synthetic.main.activity_list_serie.*
 import kotlinx.android.synthetic.main.fragment_calendar_description.*
+import kotlinx.android.synthetic.main.list_entrainement_view.view.*
 import kotlin.properties.Delegates
 
 class FragmentProfilHistorique : Fragment() {
@@ -29,9 +31,11 @@ class FragmentProfilHistorique : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_list_entrainement, container, false)
+
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        addTraining.setVisibility(View.INVISIBLE)
         read_entrainement()
         //listen result from the ParentFragment through FragmentManager (ParentFragmentManager)
         //Once result receive show the Toast
@@ -65,7 +69,9 @@ class FragmentProfilHistorique : Fragment() {
                         results.map {
                             for (id in listentrainement)
                                 if (id == it.id) {
-                                    entrainements.add(Entrainement(null, it.id, it.get("title").toString()))
+                                    entrainements.add(Entrainement(null, it.id, it.get("title").toString(),
+                                        it.get("dates") as ArrayList<Timestamp>?
+                                    ))
                                 }
                         }
                         list_entrainements_recyclerview.apply {
@@ -75,8 +81,6 @@ class FragmentProfilHistorique : Fragment() {
                             // set the custom adapter to the RecyclerView
                             adapter = context?.let { ListEntrainementAdapter(entrainements, it,false,true) }
                         }
-
-
 
 
                     }
